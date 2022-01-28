@@ -1,8 +1,27 @@
-{% extended 'base.html'%}
+{% extends 'base.html' %}
 
-{% block head%}
-<link rel="stylesheet" href="/static/css/home.css" >
+{% block head %}
+    <link rel="stylesheet" href="/static/css/home.css">
+
 {% endblock %}
 
-{% block content%}
+{% block content %}
+    <div class="wrap">
+        <div class="banner">
+            <div class="search_box">
+                <input type="text" class="search_box_text">
+                <button class="search_box_button"> 검색</button>
+            </div>
+        </div>
+        <div class="content_wrapper">
+            <div class="recommend_row">
+                <div class="recommend_title"></div>
+                <div class="recommend_ddd"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://kit.fontawesome.com/8c1045b6d4.js" crossorigin="anonymous"></script>
 {% endblock %}
