@@ -1,0 +1,95 @@
+body{
+    font-family: Cafe24SsurroundAir;
+}
+#main_container{
+    width:1260px;
+    margin:20px auto;
+}
+#user_wrapper{
+    display: flex;
+    justify-content: start;
+    width:1260px;
+    margin-bottom: 50px;
+
+}
+#profile{
+    background-color: #293D67;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#image{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid peru;
+}
+.user_desc{
+    width: 700px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    background-color: lightgoldenrodyellow;
+    justify-content: space-around;
+    font-size: 18px;
+    margin-left: 10px;
+
+}
+.counts{
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+}
+.count{
+    font-size: 20px;
+}
+#user_pick{
+    font-weight: 600;
+    font-size: 30px;
+    color : #ff7100 ;
+}
+#pick_contents_wrapper{
+    width:1260px;
+    height:800px;
+    overflow-y: scroll;
+    background-color: #FFF3C8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+#store_box{
+    width:1100px;
+    height: 200px;
+    background-color: #f6f6f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:20px;
+    border: 1px solid lightgrey;
+}
+#img_box{
+    width:280px;
+    height:180px;
+    margin-left: 10px;
+}
+#store_img{
+    align-items: center;
+    width: 280px;
+    height: 180px;
+}
+#store_desc_box{
+    width:800px;
+    margin-left: 20px;
+}
+#store_name{
+    font-size: 25px;
+    font-weight: 600;
+}
+.left_desc{
+    font-size: 18px;
+    color: #888888;
+    margin-top: 15px;
+}
