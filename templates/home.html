@@ -1,27 +1,65 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block head %}
-    <link rel="stylesheet" href="/static/css/home.css">
-
+    <link rel="stylesheet" href="{% static "css/home.css" %}?after"/>
 {% endblock %}
+
+
 
 {% block content %}
     <div class="wrap">
         <div class="banner">
             <div class="search_box">
-                <input type="text" class="search_box_text">
+                <input type="text" class="search_box_text"/>
                 <button class="search_box_button"> 검색</button>
             </div>
         </div>
         <div class="content_wrapper">
             <div class="recommend_row">
-                <div class="recommend_title"></div>
-                <div class="recommend_ddd"></div>
+                <div class="recommend_title">
+                    <p>오늘의 추천 목록!</p>
+                </div>
+                <div class="recommend_content">
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                </div>
+            </div>
+            <div class="recommend_row">
+                <div class="recommend_title">
+                    <p>넌 지금 야식이 땡긴다!</p>
+                </div>
+                <div class="recommend_content">
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                </div>
+            </div>
+            <div class="recommend_row">
+                <div class="recommend_title">
+                    <p>츄라이! 츄라이!</p>
+                </div>
+                <div class="recommend_content">
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                    <div class="recommend_card"></div>
+                </div>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block script %}
-    <script src="https://kit.fontawesome.com/8c1045b6d4.js" crossorigin="anonymous"></script>
+
 {% endblock %}

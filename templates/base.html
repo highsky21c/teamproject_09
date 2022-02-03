@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/no.css"> <!--normalizing-->
-    <link rel="stylesheet" href="/static/css/base.css"> <!--css적용파일-->
+    <title>{% block title %}Food!!{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "css/no.css" %}"> <!--normalizing-->
+    <link rel="stylesheet" href="{% static "css/base.css" %}"> <!--css적용파일-->
     <script src="/static/js/base.js"></script> <!--js적용파일-->
     {% block head %}
-
     {% endblock %}
 </head>
 <body>
@@ -26,12 +26,13 @@
         <a class="" href="/logout"> Logout </a>
     {% endif %}
     </div>
-
 </div>
 {% block content %}
-
 {% endblock %}
+
 {% block script %}
 {% endblock %}
+
+<script src="https://kit.fontawesome.com/8c1045b6d4.js" crossorigin="anonymous"></script>
 </body>
 </html>
