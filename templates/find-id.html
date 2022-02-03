@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block head%}
+<link rel="stylesheet" href="/static/css/find-id.css"> <!--css적용파일-->
+{% endblock %}
+
+{% block content%}
+    <div id = "main-container">
+        <div id ="logo-div"><!--로고는 백그라운드로 들어감.-->
+        </div>
+        <div id="contents-box">
+            <form method="post" action="find-id/">
+                <div class="name_to_password">
+                    <p class="left-words">이메일</p>
+                    <input type="email" class="input_box" name="email" placeholder="이메일 입력하세요">
+                </div>
+                <div class="name_to_password">
+                    <p class="left-words">이름</p>
+                    <input type="text" class="input_box" name="username" placeholder="이름을 입력하세요">
+                </div>
+                <button type="submit" id="find-id">아이디 찾기</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

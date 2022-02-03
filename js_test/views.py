@@ -14,3 +14,9 @@ def join(request):
 
 def login(request):
     return render(request, 'login.html', {})
+
+def findid(request):
+    return render(request, 'find-id.html', {})
+
+def findpw(request):
+    return render(request, 'find-pw.html', {})
