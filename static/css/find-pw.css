@@ -1,9 +1,9 @@
 body{
+    font-family: Cafe24SsurroundAir;
     /*background-image: ;*/
 /*야는일단 나중에*/
 }
 .left-words{
-    font-family: Cafe24SsurroundAir;
     font-weight: bold;
     font-size: 20px;
 }
@@ -58,7 +58,6 @@ body{
 }
 .optional{
     font-size: 18px;
-    font-family: Cafe24SsurroundAir;
     margin-bottom: 10px;
     line-height: 120%;/*줄간격 조정*/
 }
@@ -78,7 +77,6 @@ body{
     border-right: 3px double #293D67;
     border-bottom: 3px double #293D67;
     border-radius: 5px;
-    font-family: Cafe24SsurroundAir;
     color: white;
     font-weight: bold;
     font-size: 20px;
