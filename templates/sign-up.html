@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+
+{% block head%}
+<link rel="stylesheet" href="/static/css/sign-up.css"> <!--css적용파일-->
+{% endblock %}
+
+{% block content%}
+    <div id = "main-container">
+        <div id ="logo-div"><!--로고는 백그라운드로 들어감.-->
+        </div>
+        <div id="contents-box">
+            <form method="post" action="/sign-up/">
+                <div class="name_to_password">
+                    <p class="left-words">이름</p>
+                    <input type="text" class="input_box" name="username" placeholder="이름을 입력하세요">
+                </div>
+                <div class="name_to_password">
+                    <p class="left-words">아이디</p>
+                    <input type="text" class="input_box" name="id" placeholder="사용할 아이디를 입력하세요">
+                </div>
+                <div class="name_to_password">
+                    <p class="left-words">비밀번호</p>
+                    <input type="password" class="input_box" name="password" placeholder="사용할 비밀번호를 입력하세요">
+                </div>
+                <div class="name_to_password">
+                    <p class="left-words">비밀번호 확인</p>
+                    <input type="password" class="input_box" name="password2" placeholder="비밀번호를 한번더 입력하세요">
+                </div>
+                <div class="name_to_password">
+                    <p class="left-words">이메일</p>
+                    <input type="email" class="input_box" name="email" placeholder="이메일 입력하세요">
+                </div>
+                <p class="optional">당신의 허리사이즈를 inch로 환산하시오.(선택사항)</p>
+                <input type="text" class="inch-input" name="optional" value="">
+                <p class="optional">당신이 좋아하는 음식종류는?(다중선택가능)</p>
+                <div id="checkbox_wrapper">
+                <!--name 어떻게 할지 정해야 할듯.-->
+                    <input class="checkbox" type="checkbox" name="food1" value="한식"> 한식
+                    <input class="checkbox" type="checkbox" name="food2" value="중식"> 중식
+                    <input class="checkbox" type="checkbox" name="food3" value="일식"> 일식
+                    <input class="checkbox" type="checkbox" name="food4" value="이탈리안"> 이탈리안
+                    <input class="checkbox" type="checkbox" name="food5" value="국수"> 국수
+                    <input class="checkbox" type="checkbox" name="food6" value="고기"> 고기 요리
+                </div>
+                <button type="submit" id="join">회원가입</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

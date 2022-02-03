@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+
+{% block head%}
+<link rel="stylesheet" href="/static/css/find-pw.css"> <!--css적용파일-->
+{% endblock %}
+
+{% block content%}
+    <div id = "main-container">
+        <div id ="logo-div"><!--로고는 백그라운드로 들어감.-->
+        </div>
+        <div id="contents-box">
+            <form method="post" action="find-id/">
+                <div class="name_to_password">
+                    <p class="left-words">이메일</p>
+                    <input type="email" class="input_box" name="email" placeholder="이메일 입력하세요">
+                </div>
+                <div class="optional" >
+                    <p>당신의 허리사이즈를 inch로 환산한다면?<br>(회원가입시 질문)</p>
+                    <input type="text" class="optional_box" name="optional" placeholder="기억안나면 패스!">
+                </div>
+
+                <br>
+                <button type="submit" id="find-pw">비밀번호 찾기</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
