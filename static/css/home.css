@@ -58,14 +58,8 @@
 }
 
 .recommend_row{
-    margin-top:  30px;
-    display : flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
+    margin-top:  80px;
     width : 100%;
-    height : 250px;
-
 }
 
 .recommend_title p{
@@ -80,12 +74,18 @@
     width : 1260px;
     white-space: nowrap;
     overflow-x: scroll;
-    height :150px;
+    height :200px;
+    overflow-y: hidden;
+    margin-top: 30px;
+}
+
+.recommend_content::-webkit-scrollbar{
+    display: none;
 }
 
 .recommend_card{
     display: inline-block;
-    margin: 0 10px 0 10px;
+    margin:  50px 10px 0 10px;
     width: 250px;
     height: 150px;
     background-image: url("/static/img/333417_1640610154368611.jpg");
@@ -93,9 +93,10 @@
     background-size: cover;
     background-position: center;
     cursor: pointer;
+    transition: all 0.3s ease-out;
+    border-radius: 10px;
 }
 
 .recommend_card:hover{
-    transform: scale(1.5);
-    border: 3px solid #F39C1B;
+    transform: translateY(-50px);
 }
