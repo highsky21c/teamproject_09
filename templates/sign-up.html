@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+
+{% block head%}
+<link rel="stylesheet" href="/static/css/.css" >
+<link rel="stylesheet" href="/static/js/.js">
+{% endblock %}
+
+{% block content%}
+    <div id = "main-container">
+        <div id ="logo-div">
+            <img id="logo" src="/static/img/team9_ylogo.png">
+        </div>
+        <div id="">
+            <p class="left-words">이름</p>
+            <input type="text" class="input_box" name="username">
+            <p class="left-words">아이디</p>
+            <input type="text" class="input_box" name="id">
+            <p class="left-words">비밀번호</p>
+            <input type="text" class="input_box" name="password">
+            <p class="left-words">비밀번호 확인</p>
+            <input type="text" class="input_box" name="password2">
+            <p class="optional">당신의 허리사이즈를 inch로 환산하시오.</p>
+            <input type="text" class="input_box" name="optional">
+            <p >당신이 좋아하는 음식종류는?(다중선택가능)</p>
+
+        </div>
+    </div>
+{% endblock %}
