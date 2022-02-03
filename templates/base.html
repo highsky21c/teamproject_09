@@ -2,27 +2,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block head %}
-  <meta charset="UTF-8">
-  <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="/static/css/base.css"> <!--css적용파일-->
-  <script src="/static/js/base.js"></script> <!--js적용파일-->
-  {% endblock %}
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{% block title %}Food!!{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "css/no.css" %}"> <!--normalizing-->
+    <link rel="stylesheet" href="{% static "css/base.css" %}"> <!--css적용파일-->
+    <script src="/static/js/base.js"></script> <!--js적용파일-->
+    {% block head %}
+    {% endblock %}
 </head>
 <body>
 <!--헤더부분-->
 <div id="header">
-  {% if not user.is_authenticated %} <!--로그인상황이 아닐때-->
-  <a class="" href="/login"> 로그인 </a>
-  <a class="" href="/join"> 회원가입 </a>
-  {% else %} <!--로그인이 잘 되어있을때-->
-  <a class="" href="/profile">{{ user.username }}님</a>
-  <a class="" href="/logout"> 로그아웃 </a>
-  {% endif%}
+    <div id="logo">
+        <img src="/static/img/로고%20-%20주황색버전.PNG" >
+    </div>
+    <div class="header_buttons">
+        {% if not user.is_authenticated %} <!--로그인상황이 아닐때-->
+        <i class="far fa-user-circle fa-3x"></i>
+        <a class="" href="/join"> Logout </a>
+    {% else %} <!--로그인이 잘 되어있을때-->
+        <a class="" href="/profile">{{ user.username }}님</a>
+        <a class="" href="/logout"> Logout </a>
+    {% endif %}
+    </div>
 </div>
 {% block content %}
-
 {% endblock %}
 
+{% block script %}
+{% endblock %}
+
+<script src="https://kit.fontawesome.com/8c1045b6d4.js" crossorigin="anonymous"></script>
 </body>
 </html>
