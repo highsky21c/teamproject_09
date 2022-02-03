@@ -1,0 +1,110 @@
+body{
+    /*background-image: ;*/
+/*야는일단 나중에*/
+}
+.left-words{
+    font-family: Cafe24SsurroundAir;
+    font-weight: bold;
+    font-size: 20px;
+}
+#header{
+    display:none;
+}
+#main-container{
+    width: 450px;
+    height: 500px;
+    margin:15% auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 3px solid #060606 ;
+    border-radius: 15px;
+}
+#logo-div{
+    width: 250px;
+    height: 150px;
+    background-image: url("/static/img/team9_ylogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-bottom: 50px;
+}
+
+#contents-box{
+    width: 450px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.name_to_password{
+    display: flex;
+    margin-bottom: 30px;
+}
+.left-words{
+    margin-right: 20px;
+    width:80px;
+    height: 30px;
+    margin-top: 13px;
+}
+.input_box{
+    width:250px;
+    height: 35px;
+    font-size: 18px;
+}
+#finds{
+    display: flex;
+    justify-content: center;
+}
+.find{
+    text-decoration-line: none;
+    font-family: Cafe24SsurroundAir;
+    letter-spacing: 2px; /*자간*/
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    margin-right: 5px;
+    margin-left: 7px;
+    margin-bottom: 10px;
+}
+
+#btns{
+    display:flex;
+    margin-top: 25px;
+    justify-content: space-around;
+
+}
+#join{
+    background-color: #293D67;
+    border-top: 2px solid #293D67;
+    border-left: 2px solid #293D67;
+    border-right: 3px double #293D67;
+    border-bottom: 3px double #293D67;
+    text-decoration-line: none;
+    font-family: Cafe24SsurroundAir;
+    color: white;
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+    width: 150px;
+    height: 45px;
+    text-align: center;
+    line-height: 50px; /*높이와 같은 line-height를 주면 세로 가운데정렬이 된다고합니다.*/
+    border-radius: 5px;
+}
+#login{
+    background-color: #F39C1B;
+    border-top: 2px solid #293D67;
+    border-left: 2px solid #293D67;
+    border-right: 3px double #293D67;
+    border-bottom: 3px double #293D67;
+    border-radius: 5px;
+    font-family: Cafe24SsurroundAir;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    letter-spacing: 3px;/*자간*/
+}

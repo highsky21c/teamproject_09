@@ -11,3 +11,6 @@ def detail(request):
 
 def join(request):
     return render(request, 'sign-up.html',{})
+
+def login(request):
+    return render(request, 'login.html', {})
