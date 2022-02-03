@@ -10,6 +10,7 @@
         </div>
         <div id="contents-box">
             <form method="post" action="/sign-up/">
+                {% csrf_token %}
                 <div class="name_to_password">
                     <p class="left-words">이름</p>
                     <input type="text" class="input_box" name="username" placeholder="이름을 입력하세요">
