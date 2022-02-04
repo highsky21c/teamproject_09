@@ -5,9 +5,8 @@ from django.db import models
 class Favorite(models.Model):
     class Meta:
         db_table = "favorite"
-
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.CharField(max_length=10)
     date = models.DateTimeField(auto_now=True)
-    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    content = models.CharField(max_length=10)
 
 
