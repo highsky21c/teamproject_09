@@ -3,6 +3,7 @@
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href="{% static "css/home.css" %}?after"/>
+
 {% endblock %}
 
 
@@ -21,13 +22,13 @@
                     <p>오늘의 추천 목록!</p>
                 </div>
                 <div class="recommend_content">
-                    <div class="recommend_card"></div>
-                    <div class="recommend_card"></div>
-                    <div class="recommend_card"></div>
-                    <div class="recommend_card"></div>
-                    <div class="recommend_card"></div>
-                    <div class="recommend_card"></div>
-                    <div class="recommend_card"></div>
+                    <div class="recommend_card" onclick="test(event)" id="1"></div>
+                    <div class="recommend_card" id="2"></div>
+                    <div class="recommend_card" id="3"></div>
+                    <div class="recommend_card" id="4"></div>
+                    <div class="recommend_card" id="5"></div>
+                    <div class="recommend_card" id="6"></div>
+                    <div class="recommend_card" id="7"></div>
                 </div>
             </div>
             <div class="recommend_row">
@@ -61,5 +62,5 @@
 {% endblock %}
 
 {% block script %}
-
+    <script src="/static/js/home.js"></script>
 {% endblock %}

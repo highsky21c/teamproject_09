@@ -1,0 +1,75 @@
+body{
+    font-family: Cafe24SsurroundAir;
+    /*background-image: ;*/
+/*야는일단 나중에*/
+}
+.left-words{
+    font-weight: bold;
+    font-size: 20px;
+}
+#header{
+    display:none;
+}
+#main-container{
+    width: 450px;
+    height: 500px;
+    margin:15% auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 3px solid #060606 ;
+    border-radius: 15px;
+}
+#logo-div{
+    width: 250px;
+    height: 150px;
+    background-image: url("/static/img/team9_ylogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-bottom: 50px;
+}
+
+#contents-box{
+    width: 450px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.name_to_password{
+    display: flex;
+    margin-bottom: 30px;
+}
+.left-words{
+    margin-right: 20px;
+    width:80px;
+    height: 30px;
+    margin-top: 13px;
+}
+.input_box{
+    width:250px;
+    height: 35px;
+    font-size: 18px;
+}
+.input_box:focus{
+    outline: 2px solid #F39C1B;
+}
+
+#find-id{
+    background-color: #ec6f1f;
+    border-top: 2px solid #293D67;
+    border-left: 2px solid #293D67;
+    border-right: 3px double #293D67;
+    border-bottom: 3px double #293D67;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    letter-spacing: 1px;/*자간*/
+    margin-top: 10px;
+    margin-left: 105px;
+}
