@@ -29,7 +29,9 @@
 </div>
 {% block content %}
 {% endblock %}
-{% include 'footer.html' %}
+{% if not 'sign-up.html' or not 'login.html' or not 'find-id.html' or not 'find-pw.html' %}
+    {% include 'footer.html' %}
+{% endif %}
     <script src="/static/js/base.js"></script> <!--js적용파일-->
     <script src="https://kit.fontawesome.com/8c1045b6d4.js" crossorigin="anonymous"></script>
 {% block script %}

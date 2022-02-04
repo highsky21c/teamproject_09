@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-
+{% block title %}회원가입{% endblock %}
 {% block head%}
 <link rel="stylesheet" href="/static/css/sign-up.css"> <!--css적용파일-->
 {% endblock %}
@@ -10,6 +10,7 @@
         </div>
         <div id="contents-box">
             <form method="post" action="/sign-up/">
+                {% csrf_token %}
                 <div class="name_to_password">
                     <p class="left-words">이름</p>
                     <input type="text" class="input_box" name="username" placeholder="이름을 입력하세요">

@@ -20,3 +20,6 @@ def findid(request):
 
 def findpw(request):
     return render(request, 'find-pw.html', {})
+
+def profile(request):
+    return render(request, 'profile.html', {})

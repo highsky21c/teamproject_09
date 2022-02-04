@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-
+{% block title %}로그인 페이지{% endblock %}
 {% block head%}
 <link rel="stylesheet" href="/static/css/login.css"> <!--css적용파일-->
 {% endblock %}
@@ -10,6 +10,7 @@
         </div>
         <div id="contents-box">
             <form method="post" action="sign-in/">
+                {% csrf_token %}
                 <div class="name_to_password">
                     <p class="left-words">아이디</p>
                     <input type="text" class="input_box" name="id" placeholder="아이디를 입력하세요">

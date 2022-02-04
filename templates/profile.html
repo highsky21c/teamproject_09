@@ -1,0 +1,169 @@
+{% extends 'base.html'%}
+{% block title %}프로필페이지{% endblock %}
+
+
+{% block head%}
+<link rel="stylesheet" href="/static/css/profile.css"> <!--css적용파일-->
+{% endblock %}
+
+{% block content%}
+    <div id="main_container">
+        <div id="user_wrapper">
+            <div id="profile">
+                <img id="image" src="/static/img/default.png">
+                <br>
+                <p>사진변경</p> <!--프로필변경부분 연구후 수정할것-->
+            </div>
+            <div class="user_desc">
+                <p>username님</p>
+                <div class="counts">
+                    <p class="count"> 좋아요 누른 가게 수: n개</p>
+                    <p class="count"> 작성한 댓글 수: n개 </p>
+                </div>
+            </div>
+        </div>
+        <p class="box_title">username님의 픽</p>
+        <div id="pick_contents_container"><!--조건문쓰자~ 3개이상일때, 3개보다 작을때-->
+            <div id="store_box">
+                <div id="img_box">
+                    <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
+                </div>
+                <div id="store_desc_wrapper">
+                    <p id="store_name" class="s_name">가게이름</p>
+                    <div class="desc-box">
+                        <div class="left_desc">
+                            <p id="store_address" class="descs">주소: 00시 00구</p>
+                            <p id="store_phonenum"  class="descs">전화번호 : 000-000-0000</p>
+                            <p id="price" class="descs">가격대: n만원대</p>
+                        </div>
+                        <div class="right_desc">
+                            <p id="store_worktime" class="descs">운영시간:00:00~00:00</p>
+                            <p id="menu" class="descs">메뉴: 0000</p>
+                        </div>
+                    </div>
+                    <div id="tags"><!--얘도조건문 쓰자!-->
+                        <p id="tag"># 음식종류</p>
+                    </div>
+                </div>
+            </div>
+            <div id="store_box">
+                <div id="img_box">
+                    <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
+                </div>
+                <div id="store_desc_wrapper">
+                    <p id="store_name" class="s_name">가게이름</p>
+                    <div class="desc-box">
+                        <div class="left_desc">
+                            <p id="store_address" class="descs">주소: 00시 00구</p>
+                            <p id="store_phonenum"  class="descs">전화번호 : 000-000-0000</p>
+                            <p id="price" class="descs">가격대: n만원대</p>
+                        </div>
+                        <div class="right_desc">
+                            <p id="store_worktime" class="descs">운영시간:00:00~00:00</p>
+                            <p id="menu" class="descs">메뉴: 0000</p>
+                        </div>
+                    </div>
+
+
+
+                    <div id="tags"><!--얘도조건문 쓰자!-->
+                        <p id="tag"># 음식종류</p>
+                    </div>
+                </div>
+            </div>
+            <div id="store_box">
+                <div id="img_box">
+                    <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
+                </div>
+                <div id="store_desc_wrapper">
+                    <p id="store_name" class="s_name">가게이름</p>
+                    <div class="desc-box">
+                        <div class="left_desc">
+                            <p id="store_address" class="descs">주소: 00시 00구</p>
+                            <p id="store_phonenum"  class="descs">전화번호 : 000-000-0000</p>
+                            <p id="price" class="descs">가격대: n만원대</p>
+                        </div>
+                        <div class="right_desc">
+                            <p id="store_worktime" class="descs">운영시간:00:00~00:00</p>
+                            <p id="menu" class="descs">메뉴: 0000</p>
+                        </div>
+                    </div>
+
+
+
+                    <div id="tags"><!--얘도조건문 쓰자!-->
+                        <p id="tag"># 음식종류</p>
+                    </div>
+                </div>
+            </div>
+            <div id="store_box">
+                <div id="img_box">
+                    <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
+                </div>
+                <div id="store_desc_wrapper">
+                    <p id="store_name" class="s_name">가게이름</p>
+                    <div class="desc-box">
+                        <div class="left_desc">
+                            <p id="store_address" class="descs">주소: 00시 00구</p>
+                            <p id="store_phonenum"  class="descs">전화번호 : 000-000-0000</p>
+                            <p id="price" class="descs">가격대: n만원대</p>
+                        </div>
+                        <div class="right_desc">
+                            <p id="store_worktime" class="descs">운영시간:00:00~00:00</p>
+                            <p id="menu" class="descs">메뉴: 0000</p>
+                        </div>
+                    </div>
+
+
+
+                    <div id="tags"><!--얘도조건문 쓰자!-->
+                        <p id="tag"># 음식종류</p>
+                    </div>
+                </div>
+            </div>
+            <div id="store_box">
+                <div id="img_box">
+                    <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
+                </div>
+                <div id="store_desc_wrapper">
+                    <p id="store_name" class="s_name">가게이름</p>
+                    <div class="desc-box">
+                        <div class="left_desc">
+                            <p id="store_address" class="descs">주소: 00시 00구</p>
+                            <p id="store_phonenum"  class="descs">전화번호 : 000-000-0000</p>
+                            <p id="price" class="descs">가격대: n만원대</p>
+                        </div>
+                        <div class="right_desc">
+                            <p id="store_worktime" class="descs">운영시간:00:00~00:00</p>
+                            <p id="menu" class="descs">메뉴: 0000</p>
+                        </div>
+                    </div>
+
+
+
+                    <div id="tags"><!--얘도조건문 쓰자!-->
+                        <p id="tag"># 음식종류</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <p class="box_title">이런 가게들은 어때요?</p>
+        <div id="recommend_wrapper"><!--추천박스-->
+            <div class="recommend_imgbox"><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
+                <img id="recommend_img" class="rcm_img" src="/static/img/d.jpg">
+            </div>
+            <div class="recommend_descbox">
+                <p class="s_descs">가게이름:</p>
+                <p class="s_descs">주소:</p>
+                <p class="s_descs">가격대:</p>
+                <p class="s_descs">음식종류:</p>
+            </div>
+        </div>
+    </div>
+
+{% include 'footer.html' %}
+{% endblock %}
+
+<script src="/static/js/base.js"></script> <!--js적용파일-->
+<script src="https://kit.fontawesome.com/8c1045b6d4.js" crossorigin="anonymous"></script>
