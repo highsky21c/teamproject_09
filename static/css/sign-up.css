@@ -1,22 +1,32 @@
 body{
     font-family: Cafe24SsurroundAir;
+    overflow: hidden;
 }
-.bgimg{
+#box1{
+    width:100%;
+    height: 100%;
+    background-color: rgba(237, 118, 53, 0.54);
+    opacity: 50%;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+.bgImg{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(238, 124, 63, 0.6);
-    z-index: -1;
-    animation: fadeIn .2s linear;
+    z-index: -2;
+    animation: fadeIn .5s linear;
 }
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
     to {
-        opacity: 1;
+        opacity: 0.3;
     }
 }
 .left-words{
@@ -29,7 +39,7 @@ body{
 #main-container{
     width: 500px;
     height: 800px;
-    margin:10% auto;
+    margin:40px auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
