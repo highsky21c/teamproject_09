@@ -21,12 +21,25 @@ def load_favorite(request):
             'result': json_favorite
         }
     return HttpResponse(json.dumps(context), content_type='application/json')
-    # return JsonResponse(context)
 
 
 def add_favorite(request):
-    user = 'js'
-    new_favorite = Favorite.objects.create(user=user, content='Ramen')
+    storename = request.POST['store_name']
+    user = request.user.is_authenticated
+    new_favorite = Favorite.objects.create(user=user, content=storename)
     new_favorite.save()
-    return HttpResponse('db저장!')
+    context = {
+        'result': 'DB 추가!'
+    }
+    return HttpResponse(json.dumps(context), content_type='application/json')
 
+
+def delete_favorite(request):
+    storename = request.POST['store_name']
+    user = request.user.is_authenticated
+    new_favorite = Favorite.objects.filter(user=user, content=storename)
+    new_favorite.delete()
+    context = {
+        'result': '삭제 완료'
+    }
+    return HttpResponse(json.dumps(context), content_type='application/json')
