@@ -9,30 +9,27 @@ body{
     display: flex;
     justify-content: start;
     width:1260px;
-    margin-bottom: 50px;
 }
 #profile{
-    background-color: #293D67;
-    width: 120px;
-    height: 120px;
+    width: 220px;
+    height: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 #image{
-    width: 90px;
-    height: 90px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     border: 2px solid peru;
 }
 .user_desc{
     width: 700px;
-    height: 120px;
+    height: 220px;
     display: flex;
     flex-direction: column;
-    background-color: lightgoldenrodyellow;
     justify-content: space-around;
-    font-size: 18px;
+    font-size: 20px;
     margin-left: 10px;
 }
 .counts{
@@ -41,19 +38,19 @@ body{
     justify-content: space-between;
 }
 .count{
-    font-size: 20px;
+    font-size: 22px;
 }
-#user_pick{
+.box_title{
     font-weight: 600;
     font-size: 30px;
     color : #ff7100;
     margin-bottom: 10px;
+    margin-top: 50px;
 }
-#pick_contents_wrapper{
+#pick_contents_container{
     width:1260px;
-    max-height: 1300px;
+    max-height: 1200px;
     overflow-y: scroll;
-    background-color: #FFF3C8;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,18 +75,24 @@ body{
     width: 280px;
     height: 180px;
 }
-#store_desc_box{
+#store_desc_wrapper{
     width:800px;
     margin-left: 20px;
 }
-#store_name{
+.s_name{
     font-size: 25px;
     font-weight: 600;
 }
-.left_desc{
+.descs{
     font-size: 18px;
     color: #888888;
     margin-top: 15px;
+}
+.desc-box{
+    display: flex;
+}
+.right_desc{
+    margin-left: 10px;
 }
 #tags{
     width:600px
@@ -103,3 +106,40 @@ body{
     line-height: 30px;
     padding-left: 5px;
 }
+#recommend_wrapper{
+    width:1260px;
+    background-color: #f5dd5d;
+    border: 1px double lightgrey;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.recommend_imgbox{
+    width:300px;
+    height:200px;
+    margin:20px;
+    position: absolute;
+    z-index: 2;
+}
+#recommend_img{
+    width:280px;
+    height:180px;
+    margin:10px;
+}
+.recommend_descbox{
+    width:300px;
+    height:200px;
+    margin:20px;
+    position: absolute;
+    z-index: 3;
+    background-color: white;
+    opacity: 80%;
+}
+.s_descs{
+    font-size: 15px;
+    margin:15px 0 0 10px;
+    font-weight: 600;
+    color: black;
+}
+
+
