@@ -131,11 +131,10 @@
     align-items: start;
 }
 
-.map{
+#map{
     margin-left: 40px;
     width : 400px;
     height : 400px;
-    background-color: darkgray;
 }
 
 .content_commnets_row{
@@ -268,7 +267,6 @@
     width : 350px;
     height : 450px;
     background-color: #3E3E3E;
-    margin-right : 30px;
     border-radius: 20px;
     background-image: url("/static/img/333417_1640610154368611.jpg");
     background-repeat: no-repeat;
