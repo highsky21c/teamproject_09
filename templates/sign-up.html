@@ -2,6 +2,8 @@
 {% block title %}회원가입{% endblock %}
 {% block head%}
 <link rel="stylesheet" href="/static/css/sign-up.css"> <!--css적용파일-->
+
+<script type="text/javascript" src="/static/js/sign-up.js"></script>
 {% endblock %}
 
 {% block content%}
@@ -9,7 +11,7 @@
         <div id ="logo-div"><!--로고는 백그라운드로 들어감.-->
         </div>
         <div id="contents-box">
-            <form method="post" action="/sign-up/">
+            <form method="post" action="test/">
                 {% csrf_token %}
                 <div class="name_to_password">
                     <p class="left-words">이름</p>
@@ -36,12 +38,12 @@
                 <p class="optional">당신이 좋아하는 음식종류는?(다중선택가능)</p>
                 <div id="checkbox_wrapper">
                 <!--name 어떻게 할지 정해야 할듯.-->
-                    <input class="checkbox" type="checkbox" name="food1" value="한식"> 한식
-                    <input class="checkbox" type="checkbox" name="food2" value="중식"> 중식
-                    <input class="checkbox" type="checkbox" name="food3" value="일식"> 일식
-                    <input class="checkbox" type="checkbox" name="food4" value="이탈리안"> 이탈리안
-                    <input class="checkbox" type="checkbox" name="food5" value="국수"> 국수
-                    <input class="checkbox" type="checkbox" name="food6" value="고기"> 고기 요리
+                    <input class="check" type="checkbox" name="food" value="한식"> 한식
+                    <input class="check" type="checkbox" name="food" value="중식"> 중식 <br>
+                    <input class="check" type="checkbox" name="food" value="일식"> 일식
+                    <input class="check" type="checkbox" name="food" value="이탈리안"> 이탈리안<br>
+                    <input class="check" type="checkbox" name="food" value="국수"> 국수
+                    <input class="check" type="checkbox" name="food" value="고기"> 고기 요리
                 </div>
                 <button type="submit" id="join">회원가입</button>
             </form>
