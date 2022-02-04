@@ -28,3 +28,7 @@ def findpw(request):
 
 def profile(request):
     return render(request, 'profile.html', {})
+
+def test(request):
+    a=request.POST.getlist('food')
+    return a
