@@ -3,7 +3,7 @@
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href="/static/css/detail.css">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7dbd706b8ec08ff0c7337c47a6aa4e29"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7dbd706b8ec08ff0c7337c47a6aa4e29&libraries=services"></script>
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,14 @@
         <div class='content_about_row'>
             <div class='content_title'>
                 <p>About</p>
-                <div class="favorite_box"></div>
+                <div class="favorite_box" onclick="favorite()">
+                    <i class="fas fa-star fa-3x" id="favorite_on" style="display: none;"></i>
+                    <i class="far fa-star fa-3x" id="favorite_off"></i>
+                </div>
+                <div class="like_box" onclick="like()">
+                    <i class="fas fa-heart fa-3x" id="like_on" style="display: none;"></i>
+                    <i class="far fa-heart fa-3x" id="like_off"></i>
+                </div>
             </div>
             <div class='hr'></div>
             <div class='content_about_content'>
@@ -40,7 +47,7 @@
                         <div class='info_icon'>
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <p>서울 특별시 강남구 동묘1길 232-99</p>
+                        <p id="store_address">서울특별시 중구 마른내로 114</p>
                     </div>
                     <div class='about_info_row'>
                         <div class='info_icon'>
@@ -82,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class='content_commnets_row'>
+        <div class='content_comments_row'>
             <div class='content_title'>
                 <p>Comments</p>
             </div>
@@ -124,7 +131,8 @@
                         <div class='comment_content'>
                             <p>
                                 그리고 하이토스트는 식빵 샐러드 소세지 베이컨 으로 무난한 조합들이고 배부르게 먹을수있다!
-                                오믈렛+하이토스트+오렌지 에이드 해서 27900원이다. 가끔 브런치 땡길때 종종 갈듯!</P>
+                                오믈렛+하이토스트+오렌지 에이드 해서 27900원이다. 가끔 브런치 땡길때 종종 갈듯!
+                            </P>
                         </div>
                     </div>
                     <div class='comment_like'>
