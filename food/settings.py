@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'js_test',
     'favorite',
+    'django_seed',
 ]
 
 MIDDLEWARE = [
