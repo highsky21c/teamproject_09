@@ -1,16 +1,15 @@
 <!--{#모든화면에 기초가 되는 파일#}-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% load static %}
     <meta charset="UTF-8">
     <title>{% block title %}Food!!{% endblock %}</title>
     <link rel="stylesheet" href="{% static "css/no.css" %}"> <!--normalizing-->
     <link rel="stylesheet" href="{% static "css/base.css" %}"> <!--css적용파일-->
-
-    {% block head %}
-    {% endblock %}
 </head>
+
 <body>
 <!--헤더부분-->
 <div id="header">
