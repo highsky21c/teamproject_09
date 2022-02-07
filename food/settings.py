@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'js_test',
     'storeapp',
     'favorite',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -67,12 +68,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
-    },
-    {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': [
-            '/home/html/jinja2',
-        ],
     },
 ]
 
@@ -130,3 +125,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+# food/settings.py
+AUTH_USER_MODEL = 'user.UserModel' #기본적인 장고 사용자 모델을 변경
