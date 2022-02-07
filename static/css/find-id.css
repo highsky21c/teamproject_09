@@ -39,7 +39,7 @@ body{
 #main-container{
     width: 450px;
     height: 500px;
-    margin:15% auto;
+    margin:10% auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
