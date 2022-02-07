@@ -3,7 +3,8 @@
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href="/static/css/detail.css">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7dbd706b8ec08ff0c7337c47a6aa4e29"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7dbd706b8ec08ff0c7337c47a6aa4e29&libraries=services"></script>
 {% endblock %}
 
 {% block content %}
@@ -13,19 +14,38 @@
                 <p>main</p>
             </div>
             <div class='hr'></div>
-            <div class='content_photo_picture_row'>
-                <!-- <div class='left_slider'>left</div> -->
-                <div class='content_photo_content'></div>
-                <div class='content_photo_content'></div>
-                <div class='content_photo_content'></div>
-                <div class='content_photo_content'></div>
-                <div class='content_photo_content'></div>
+            <div class="swiper content_photo_container">
+                <div class="left">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </div>
+                <div class=' content_photo_picture_row swiper-wrapper'>
+                    <!-- <div class='left_slider'>left</div> -->
+                    <div class='swiper-slide content_photo_content'>1</div>
+                    <div class='swiper-slide content_photo_content'>2</div>
+                    <div class='swiper-slide content_photo_content'>3</div>
+                    <div class='swiper-slide content_photo_content'>4</div>
+                    <div class='swiper-slide content_photo_content'>5</div>
+                    <div class='swiper-slide content_photo_content'>6</div>
+                    <div class='swiper-slide content_photo_content'>7</div>
+                    <div class='swiper-slide content_photo_content'>8</div>
+                    <div class='swiper-slide content_photo_content'>8</div>
+                </div>
+                <div class="right" id="slider_right">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </div>
             </div>
         </div>
         <div class='content_about_row'>
             <div class='content_title'>
                 <p>About</p>
-                <div class="favorite_box"></div>
+                <div class="favorite_box" onclick="favorite()">
+                    <i class="fas fa-star fa-3x" id="favorite_on" style="display: none;"></i>
+                    <i class="far fa-star fa-3x" id="favorite_off"></i>
+                </div>
+                <div class="like_box" onclick="like()">
+                    <i class="fas fa-heart fa-3x" id="like_on" style="display: none;"></i>
+                    <i class="far fa-heart fa-3x" id="like_off"></i>
+                </div>
             </div>
             <div class='hr'></div>
             <div class='content_about_content'>
@@ -40,7 +60,7 @@
                         <div class='info_icon'>
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <p>서울 특별시 강남구 동묘1길 232-99</p>
+                        <p id="store_address">서울특별시 중구 마른내로 114</p>
                     </div>
                     <div class='about_info_row'>
                         <div class='info_icon'>
@@ -71,9 +91,9 @@
                             <i class="fas fa-address-card"></i>
                         </div>
                         <div class='store_bio'>
-                            <p>둘이 먹다 죽어도 집!</p>
-                            <p>너무 맛있으니 다들 한번씩 들러주세요!!</p>
-                            <p>리뷰 이벤트 중입니다</p>
+                            <p>둘이 먹다 죽어도 집!<br>
+                                너무 맛있으니 다들 한번씩 들러주세요!!<br>
+                                리뷰 이벤트 중입니다</p>
                         </div>
                     </div>
                 </div>
@@ -82,80 +102,73 @@
                 </div>
             </div>
         </div>
-        <div class='content_commnets_row'>
+        <div class='content_comments_row'>
             <div class='content_title'>
                 <p>Comments</p>
             </div>
             <div class='hr'></div>
             <div class='content_comment_wrap'>
+                {% for comment in container %}
+
                 <div class='comment_row'>
                     <div class='comment_profile'>
-                        <img src='/static/img/default.png'>
+                        <img src='{{comment.avatar}}'>
                     </div>
                     <div class='comment_middle'>
                         <div class='comment_user_name'>
-                            <p> user name!</p>
-                        </div>
-                        <div class='hr' style=''></div>
-                        <div class='comment_content'>
-                            <p>일요일에 이대앞에 연 식당이 많지 않은데 여긴 브레이크도 없이 운영한다.
-                                가게 이름만큼 계란 요리가 맛있을것같아 시켰는데 맛있었다!
-                                예상가능 한 맛이긴 하지만! 포테이토 오믈렛은 안에 감자랑 토마토 시금치가 들어있다!
-                                그리고 하이토스트는 식빵 샐러드 소세지 베이컨 으로 무난한 조합들이고 배부르게 먹을수있다!
-                                오믈렛+하이토스트+오렌지 에이드 해서 27900원이다. 가끔 브런치 땡길때 종종 갈듯!
-                            </P>
-                        </div>
-                    </div>
-                    <div class='comment_like'>
-                        <div class='like_box'>
-                            <i class="fas fa-thumbs-up fa-3x" style="color: white;"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class='comment_row'>
-                    <div class='comment_profile'>
-                        <img src='/static/img/default.png'>
-                    </div>
-                    <div class='comment_middle'>
-                        <div class='comment_user_name'>
-                            <p> user name!</p>
+                            <p> {{comment.username}}  {{ forloop.counter0 }}</p>
                         </div>
                         <div class='hr' style=''></div>
                         <div class='comment_content'>
                             <p>
-                                그리고 하이토스트는 식빵 샐러드 소세지 베이컨 으로 무난한 조합들이고 배부르게 먹을수있다!
-                                오믈렛+하이토스트+오렌지 에이드 해서 27900원이다. 가끔 브런치 땡길때 종종 갈듯!</P>
+                                {{ comment.comment_content }}
+                            </P>
                         </div>
                     </div>
-                    <div class='comment_like'>
-                        <div class='like_box'>
-                            <i class="fas fa-thumbs-up fa-3x" style="color: white;"></i>
+                    <div class='comment_like' id="comment_{{ forloop.counter0 }}" onclick="comment_like(this.id)">
+                        <div class='comment_like_box'>
+                            <i class="fas fa-thumbs-up fa-3x comment_like_on" id='comment_{{ forloop.counter0 }}_on' style="display: none; color: white;"></i>
+                            <i class="far fa-thumbs-up fa-3x comment_like_off" id='comment_{{ forloop.counter0 }}_off' style="display:flex; color: white;"></i>
                         </div>
                     </div>
                 </div>
-                <div class='more_button'>
+                {% endfor %}
+
+                <div class='more_button' id="more_button" onclick="more(this.id)">
                     <div class='hr_more'></div>
                     <p>more</p>
                     <div class='hr_more'></div>
                 </div>
-
             </div>
-
         </div>
-        <form class='comment_write_box'>
-            <textarea class='comment_write_content'></textarea>
-            <button class='comment_write_button'>작성</button>
-        </form>
-        <div class='recommend_wrap'>
-            <div class='recommend_card'>
+        <div class='comment_write_box'>
+            {% csrf_token %}
+            <textarea class='comment_write_content' id="comment_text"></textarea>
+            <button class='comment_write_button' onclick="write_comments()">작성</button>
+        </div>
+        <div class="swiper recommend_another">
+            <div class="left" style="top:300px;">
+                <i class="fas fa-angle-left fa-2x"></i>
             </div>
-            <div class='recommend_card'></div>
-            <div class='recommend_card'></div>
-            <div class='recommend_card'></div>
-            <div class='recommend_card'></div>
+            <div class='swiper-wrapper recommend_wrap'>
+                <div class='swiper-slide recommend_card'></div>
+                <div class='swiper-slide recommend_card'></div>
+                <div class='swiper-slide recommend_card'></div>
+                <div class='swiper-slide recommend_card'></div>
+                <div class='swiper-slide recommend_card'></div>
+                <div class='swiper-slide recommend_card'></div>
+                <div class='swiper-slide recommend_card'></div>
+                <div class='swiper-slide recommend_card'></div>
+                <div class='swiper-slide recommend_card'></div>
+            </div>
+            <div class="right" style="top:300px;">
+                <i class="fas fa-angle-right fa-2x"></i>
+            </div>
         </div>
     </div>
+    {% include 'footer.html' %}
 {% endblock %}
 {% block script %}
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="/static/js/detail.js"></script>
 {% endblock %}
