@@ -74,7 +74,7 @@ $('#find-id').click(function () {
         success: function (response) {
             console.log(response)
             $('#result_id').replaceWith(
-                '<div id="result_id"><hr><div style="text-align:center;"><span style="font-size: 16px;">입력된 정보로 가입된 아이디는 </span><span style="font-size: 20px; font-weight: bold;" id="result_id">' + response.result_id +
+                '<div style="margin: 20px;" id="result_id"><hr><div style="text-align:center; "><span style="font-size: 16px;">입력된 정보로 가입된 아이디는 </span><span style="font-size: 20px; font-weight: bold;" id="result_id">' + response.result_id +
                 '</span><span style="font-size: 16px;"> 입니다.</span></div><hr></div>')
         },
         error: function () {
