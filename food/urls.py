@@ -23,5 +23,6 @@ urlpatterns = [
     path('stores/', include('storeapp.urls')),
     path('temp/home/', views.Show_Store, name='home'),
     path('', include('js_test.urls')),
-    path('favorite/', include('favorite.urls'))
+    path('favorite/', include('favorite.urls')),
+    path('user/', include('user.urls')),
 ]

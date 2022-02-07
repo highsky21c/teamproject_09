@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'storeapp',
     'favorite',
     'django_seed',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+# food/settings.py
+AUTH_USER_MODEL = 'user.UserModel' #기본적인 장고 사용자 모델을 변경
