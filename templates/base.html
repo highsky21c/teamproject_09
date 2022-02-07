@@ -25,14 +25,14 @@
         <i class="far fa-user-circle fa-3x"></i>
         <a class="" href="/join"> Logout </a>
     {% else %} <!--로그인이 잘 되어있을때-->
-        <a class="" href="/profile">{{ user.username }}님</a>
+        <a class="" href="/user/profile/">{{ user.username }}님</a>
         <a class="" href="/logout"> Logout </a>
     {% endif %}
     </div>
 </div>
 {% block content %}
 {% endblock %}
-{% if not 'sign-up.html' or not 'login.html' or not 'find-id.html' or not 'find-pw.html' %}
+{% if not 'sign-up.html' or not 'sign-in.html' or not 'find-id.html' or not 'find-pw.html' %}
     {% include 'footer.html' %}
 {% endif %}
     <script src="/static/js/base.js"></script> <!--js적용파일-->

@@ -31,7 +31,7 @@ def join(request):
     return render(request, 'sign-up.html',{})
 
 def login(request):
-    return render(request, 'login.html', {})
+    return render(request, 'sign-in.html', {})
 
 def findid(request):
     return render(request, 'find-id.html', {})
