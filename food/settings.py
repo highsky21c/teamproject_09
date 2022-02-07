@@ -36,8 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'favorite',
+
+    
     'contents',
+    'js_test',
+    'storeapp',
+    'favorite',
     'user',
 ]
 
@@ -67,12 +71,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
-    },
-    {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': [
-            '/home/html/jinja2',
-        ],
     },
 ]
 
@@ -131,4 +129,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-AUTH_USER_MODEL = 'user.UserModel'
+
+# food/settings.py
+AUTH_USER_MODEL = 'user.UserModel' #기본적인 장고 사용자 모델을 변경
+
