@@ -3,6 +3,9 @@
 {% block head%}
 <link rel="stylesheet" href="/static/css/find-id.css"> <!--css적용파일-->
 <script type="text/javascript" src="/static/js/find-id.js"></script>
+<!--id찾기를 ajax cdn으로 하기위해 Jquery CDN 추가-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 {% endblock %}
 
 {% block content%}
@@ -12,19 +15,23 @@
         <div id ="logo-div"><!--로고는 백그라운드로 들어감.-->
         </div>
         <div id="contents-box">
-            <form method="post" action="/find-id">
+            <div>
                 {% csrf_token %}
                 <div class="name_to_password">
                     <p class="left-words">이메일</p>
-                    <input type="email" class="input_box" name="email" placeholder="이메일 입력하세요">
+{#                    <input type="email" class="input_box" name="email" placeholder="이메일 입력하세요">#}
+                    <input type="text" class="input_box" id="email" name="email" placeholder="이메일 입력하세요">
                 </div>
                 <div class="name_to_password">
                     <p class="left-words">이름</p>
-                    <input type="text" class="input_box" name="username" placeholder="이름을 입력하세요">
+                    <input type="text" class="input_box" id="username" name="username" placeholder="이름을 입력하세요">
                 </div>
-                <button type="submit" id="find-id">아이디 찾기</button>
-            </form>
+                <button type="submit" id="find-id" >아이디 찾기</button>
+            </div>
         </div>
     </div>
-
+    <div id="result_id"></div>
+{% if result_id %}
+<h5>회원님의 아이디는 <strong>{{ result_id }}</strong>입니다.</h5>
+{% endif %}
 {% endblock %}
