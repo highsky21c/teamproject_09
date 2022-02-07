@@ -21,7 +21,7 @@ from storeapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('stores/', include('storeapp.urls')),
-    path('/temp/home/', views.Show_Store, name='home'),
+    path('temp/home/', views.Show_Store, name='home'),
     path('', include('js_test.urls')),
     path('favorite/', include('favorite.urls'))
 ]
