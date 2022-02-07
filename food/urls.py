@@ -23,8 +23,8 @@ urlpatterns = [
     path('jh/', include('user.urls')),
     path('', include('contents.urls')),
     path('stores/', include('storeapp.urls')),
-    path('/temp/home/', views.Show_Store, name='home'),
-    path('', include('js_test.urls')),
+    path('temp/home/', views.Show_Store, name='home'),
+    path('frontend/', include('js_test.urls')),
     path('favorite/', include('favorite.urls')),
     path('user/', include('user.urls')),
 

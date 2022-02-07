@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'js_test',
     'storeapp',
     'favorite',
+    'django_seed',
     'user',
 ]
 

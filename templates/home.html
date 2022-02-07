@@ -2,71 +2,46 @@
 
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" href="{% static "css/home.css" %}?after"/>
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{% static "css/home.css" %}?after"/>
 {% endblock %}
 
 {% block content %}
     <div class="wrap">
         <div class="banner">
             <div class="search_box">
-                <input type="text" class="search_box_text"/>
-                <button class="search_box_button"> 검색</button>
+                <input type="text" id="search" class="search_box_text"/>
+                <button class="search_box_button" onclick="load_search_result()"> 검색</button>
+                <div id="auto-search" style="display: none"></div>
             </div>
         </div>
+        <!--검색 결과 슬라이드!-->
         <div class="content_wrapper">
             <div class="recommend_row">
                 <div class="recommend_title">
-                    <p>오늘의 추천 목록!</p>
+                    <p>만두</p>
                 </div>
-                <div class="recommend_content" id="recommend_row">
-                    <div class="left" id="slider_left">
-                        <i class="fas fa-angle-left fa-3x"></i>
+                <div class="swiper recommend_content">
+                    <div class="left">
+                        <i class="fas fa-angle-left fa-2x"></i>
                     </div>
-                    {% for a in container %}
-                        <div class="recommend_card" id="store_{{ a.store }}">
-                            {{ forloop.counter0 }}
-                        </div>
-                    {% endfor %}
-                    <div class="right " id="slider_right">
-                        <i class="fas fa-angle-right fa-3x"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="recommend_row">
-                <div class="recommend_title">
-                    <p>넌 지금 야식이 땡긴다!</p>
-                </div>
-                <div class="mySwiper recommend_content">
-                    <div class="left" style="display: flex">
-                        <i class="fas fa-angle-left fa-3x"></i>
-                    </div>
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper slider_wrap">
                         {% for a in container %}
-                            <div class="swiper-slide recommend_card" id="store_{{ a.store }}" onmouseenter="zoomIn(event)">
+                            <div class="swiper-slide recommend_card" id="store_{{ a.store }}">
                                 {{ forloop.counter0 }}
                             </div>
                         {% endfor %}
                     </div>
                     <div class="right" id="slider_right">
-                        <i class="fas fa-angle-right fa-3x"></i>
+                        <i class="fas fa-angle-right fa-2x"></i>
                     </div>
-                </div>
-
-            </div>
-            <div class="recommend_row">
-                <div class="recommend_title">
-                    <p>츄라이! 츄라이!</p>
-                </div>
-                <div class="recommend_content">
-
-                    {% for a in container %}
-                        <div class="recommend_card" id="store_{{ a.store }}"></div>
-                    {% endfor %}
                 </div>
             </div>
         </div>
+
     </div>
+
+    {% include 'footer.html' %}
 
 {% endblock %}
 

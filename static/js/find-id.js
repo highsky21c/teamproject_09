@@ -1,3 +1,28 @@
+// csrf 토큰 받아오는 과정 - Ajax 사용하기 위함
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+///////////////////////
+
+
+
 $(document).ready(function() {
     //html의 body를 body라는 변수로 선언
     const body = document.querySelector("body");
@@ -22,4 +47,46 @@ function init(){
     paintImage(randomNumber);
 }
 init();
+
+var csrftoken = getCookie('csrftoken');
+$.ajaxSetup({
+    beforeSend: function (xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
 });
+
+
+
+$('#find-id').click(function () {
+    var name = $("#username").val();
+    var email = $("#email").val();
+    //이메일 유효성검사....필요
+
+    $.ajax({
+        type: "POST",
+        url: "/find-id/find/",
+        dataType: "json",
+        data: {
+            'name': name,
+            'email': email,
+        },
+        success: function (response) {
+            console.log(response)
+            $('#result_id').replaceWith(
+                '<div style="margin: 20px;" id="result_id"><hr><div style="text-align:center; "><span style="font-size: 16px;">입력된 정보로 가입된 아이디는 </span><span style="font-size: 20px; font-weight: bold;" id="result_id">' + response.result_id +
+                '</span><span style="font-size: 16px;"> 입니다.</span></div><hr></div>')
+        },
+        error: function () {
+            if (name == "" || email == "") {
+                alert('이름와 이메일을 입력해주세요.');
+            } else {
+                alert('입력하신 정보가 일치하지 않거나 존재하지 않습니다.');
+            }
+        },
+    });
+});
+
+});
+
