@@ -15,24 +15,32 @@ def main(request):  # 메인 화면
         store = {'photo': '/static/img/333417_1640610154368611.jpg', 'store': i}
         storebox.append(store)
 
+
+
     return render(request, 'home.html', {'container': storebox})
 
 
-def detail(request):
-    storebox = []
+def detail(request, store_name):
+    store = Store.objects.filter(store_name=store_name)[0]
+    print(type(store.phone_num))
+    comments = []
     for i in range(10):
-        store = {'avatar': '/static/img/333417_1640610154368611.jpg', 'username': 'username', 'comment_id': i, 'comment_content':'asdfadfadfadf'}
-        storebox.append(store)
-    return render(request, 'detail.html', {'container': storebox})
+        comment = {'avatar': '/static/img/333417_1640610154368611.jpg', 'username': 'username', 'comment_id': i, 'comment_content':'asdfadfadfadf'}
+        comments.append(comment)
+    return render(request, 'detail.html', {'comments': comments, 'store': store})
+
 
 def join(request):
     return render(request, 'sign-up.html',{})
 
+
 def login(request):
     return render(request, 'login.html', {})
 
+
 def findid(request):
     return render(request, 'find-id.html', {})
+
 
 def ajax_find_id_view(request):
     name = request.POST.get('name')
