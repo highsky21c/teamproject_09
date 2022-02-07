@@ -10,3 +10,4 @@ class UserModel(AbstractUser): #AbstractUser기능을 UserModel에 사용
 
         db_table = "my_user"
     bio = models.CharField(max_length=256, default='')
+    like_food = models.TextField(default='')
