@@ -62,6 +62,7 @@ $.ajaxSetup({
 $('#find-id').click(function () {
     var name = $("#username").val();
     var email = $("#email").val();
+    //이메일 유효성검사....필요
 
     $.ajax({
         type: "POST",
@@ -88,13 +89,4 @@ $('#find-id').click(function () {
 });
 
 });
-
-// function show_modal(){
-//     const modal = document.getElementById("modal");//html에서 id가 modal인애를 modal로 선언
-//     const find_id_btn = document.getElementById("find-id");//html에서 id가 find-id인애를 btn로 선언
-//     find_id_btn.addEventListener("click", e => {//버튼클릭했을때 모달을 띄우게.......?해도되는거니....
-//         modal.style.display = "flex"; //get으로 다른url로 나타내야하느것 아니뉘..?
-//     });
-// }
-
 

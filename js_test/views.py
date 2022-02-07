@@ -34,20 +34,6 @@ def login(request):
 def findid(request):
     return render(request, 'find-id.html', {})
 
-
-#접속중인 사용자의 접근을 방지하기 위해 decorator를 추가하고,
-#GET으로 방금 생성한 form을 뿌려주는 RecoveryIdView 클래스를 views.py에 아래와 같이 추가합니다
-@method_decorator(logout_message_required, name='dispatch')
-class FindIdView(View):
-    template_name = 'find-id.html'
-    find_id = FindIdForm
-
-    def get(self, request):
-        if request.method=='GET':
-            form = self.find_id(None)
-        return render(request, self.template_name, { 'form':form, })
-
-
 def ajax_find_id_view(request):
     name = request.POST.get('name')
     email = request.POST.get('email')
