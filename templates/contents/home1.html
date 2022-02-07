@@ -1,0 +1,101 @@
+<!-- templates/contents/home.html -->
+{% extends 'base1.html' %}
+
+{% block content %}
+    <div class="container timeline-container">
+        <div class="row">
+            <!-- 왼쪽 컬럼 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.username }}</h5>
+                        <p class="card-text"> {{ user.bio }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 오른 쪽 컬럼-->
+            <div class="col-md-7">
+                <!-- 글을 작성 하는 곳 -->
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">당신이 알고 있는 맛집을 추천해주세요</h5>
+                                        <p>
+                                        <form action="/contents/" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-group mb-2">
+                                                <textarea class="form-control" style="resize: none" name='my-subject'
+                                                          id="my-subject"></textarea>
+                                                <textarea class="form-control" style="resize: none" name='my-content'
+                                                          id="my-content"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" style="float:right;">작성하기
+                                            </button>
+                                        </form>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- 작성 된 글이 나오는 곳 -->
+                <div class="row">
+                    {% for tw in contents %}
+                        <div class="card" style="width: 18rem;">
+                            {#                            이미지수정해야함#}
+                            <img src="https://mp-seoul-image-production-s3.mangoplate.com/470631/717735_1643559129494_33750?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ tw.subject }}</h5>
+                                <p class="card-text">{{ tw.content }}</p>
+                                <a href="/contents/{{ tw.id }}" class="btn btn-primary">상세보기</a>
+                                {% if tw.author == user %}
+                                    <div style="text-align: right">
+                                        <a href="/contents/delete/{{ tw.id }}">
+                                            <span class="badge rounded-pill bg-danger">삭제</span>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {#                    {% for tw in content %}#}
+                    {#                        <div class="col-md-12 mb-2">#}
+                    {#                            <div class="card">#}
+                    {#                                <div class="card-body">#}
+                    {#                                    {% if tw.author == user %}#}
+                    {#                                        <div style="text-align: right">#}
+                    {#                                            <a href="/contents/delete/{{ tw.id }}">#}
+                    {#                                                <span class="badge rounded-pill bg-danger">삭제</span>#}
+                    {#                                            </a>#}
+                    {#                                        </div>#}
+                    {#                                    {% endif %}#}
+                    {#                                    <div style="text-align: right">#}
+                    {#                                        <a href="/contents/{{ tw.id }}">#}
+                    {#                                            <span class="badge rounded-pill bg-success">보기</span>#}
+                    {#                                        </a>#}
+                    {#                                    </div>#}
+                    {#                                    <div class="media">#}
+                    {#                                        <div class="media-body">#}
+                    {#                                            <h5 class="mt-0">{{ tw.content }}</h5>#}
+                    {#                                        </div>#}
+                    {#                                        <div style="text-align: right">#}
+                    {#                                            <span style="font-size: small">{{ tw.author.username }}-{{ tw.created_at|timesince }} 전</span>#}
+                    {#                                        </div>#}
+                    {#                                    </div>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    {% endfor %}#}
+                </div>
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+{% endblock %}
