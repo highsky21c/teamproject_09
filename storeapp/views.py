@@ -41,7 +41,6 @@ def Show_Store(request):
         main_infer_data = main_category_model.infer_vector(input_foods)
         main_most_similar_docs = main_category_model.docvecs.most_similar([main_infer_data], topn=1)
 
-
         # "main_most_similar_docs[0][0]"는 유사도 결과의 해당 인덱스 번호를 나타냄
         # 만약 입력값과 '디저트'의 유사도가 높은 것으로 나왔다. -> main_most_similar_docs[0][0] == 6
         # "main_most_similar_docs"는 "sub_most_similar_docs"에서 "key"값으로 사용
@@ -98,9 +97,8 @@ def Show_Store(request):
 
 
 def Save_Store_Data(request):
-    if SaveStore.objects.all() is not None:
+    if len(SaveStore.objects.all()) != 0:
         return HttpResponse('이미처리되었습니다.')  # 나중에 render로 바로 홈으로
-
     else:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}

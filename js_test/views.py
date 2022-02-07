@@ -22,12 +22,12 @@ def main(request):  # 메인 화면
 def detail(request, store_name):
     # user = request.user
     user = 'js'
-    store = Store.objects.filter(store_name=store_name)[0]
-    favorite = Favorite.objects.filter(user=user, content=store_name)
-    if len(favorite)==0:
-        favorite_value = 'off'
-    else:
-        favorite_value = 'on'
+    store = Store.objects.filter(store_name=store_name)
+    # favorite = Favorite.objects.filter(user=user, content=store_name)
+    # if len(favorite) == 0:
+    #     favorite_value = 'off'
+    # else:
+    #     favorite_value = 'on'
 
     comments = []
     for i in range(10):
