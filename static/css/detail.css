@@ -32,12 +32,52 @@
 }
 
 .content_photo_picture_row{
-    width: 1260px;
+    width : 100%;
     border: 1px solid rgb(255, 255, 255);
     height: 400px;
-    overflow-x: scroll;
     white-space: nowrap;
-    overflow-y: hidden;
+}
+
+.content_photo_container{
+    width : 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.left{
+    position: absolute;
+    top : 170px;
+    left : 20px;
+    width : 50px;
+    height : 50px;
+    border-radius: 25px;
+    background-color: rgb(0,0,0,0.4);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color : white;
+    z-index: 10;
+}
+
+.right{
+    position: absolute;
+    top : 170px;
+    left : 1190px;
+    width : 50px;
+    height : 50px;
+    border-radius: 25px;
+    background-color: rgb(0,0,0,0.4);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    z-index: 10;
+}
+
+.swiper-button-disabled{
+    display:none;
 }
 
 
@@ -53,24 +93,15 @@
     background-position: center;
     background-repeat: no-repeat;
     background-color: #3E3E3E;
-    overflow: hidden;
     transition: all 0.3s ease-out;
     background-image: url("/static/img/333417_1640610154368611.jpg");
     opacity: 0.5;
 
 }
 
-.content_photo_content:hover{
-    transform: translateY(-50px);
-}
 
 .content_photo_picture_row::-webkit-scrollbar{
     display: none;
-}
-
-.content_photo_content img{
-    /*width :100%;*/
-    /*height: 100%;*/
 }
 
 .content_about_row{
@@ -105,6 +136,22 @@
     position: absolute;
     right : 50px;
     top : 140px;
+    width : 60px;
+    height : 60px;
+    border-radius: 5px;
+    background-color: #EF9669;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.comment_like_box{
+    position: absolute;
+    right : 0px;
+    top : 0px;
     width : 60px;
     height : 60px;
     border-radius: 5px;
@@ -169,6 +216,8 @@
     color : white;
     padding-left: 20px;
     padding-top : 20px;
+    line-height: 50px;
+    alignment: left;
 }
 
 .about_right_content{
@@ -239,11 +288,13 @@
     background-color: #FFF8F3;
     font-size: 15px;
     padding: 10px 10px 10px 10px;
-
+    line-height: 30px;
+    font-weight: 500;
 }
 
 
 .comment_like{
+    position: relative;
     width : 60px;
     height: 60px;
     background-color: bisque;
@@ -262,7 +313,7 @@
     justify-content: center;
     align-items: center;
     color: #FF7100;
-
+    cursor: pointer;
 }
 
 .comment_write_box{
@@ -301,8 +352,6 @@
     width : 100%;
     height : 450px;
     display: block;
-    overflow-y: hidden;
-    overflow-x: scroll;
     white-space: nowrap;
 }
 
@@ -336,4 +385,9 @@
     width: 100px;
     height: 300px;
     background-color: rgb(0,0,0,0.5);
+}
+
+.recommend_another{
+    position: relative;
+    overflow: hidden;
 }

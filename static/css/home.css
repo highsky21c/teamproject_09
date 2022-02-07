@@ -17,7 +17,7 @@
 
 
 .search_box{
-
+    position: relative;
     width : 800px;
     height : 70px;
 }
@@ -33,11 +33,16 @@
     outline: none;
 }
 
+.search_box_text{
+    z-index: 10;
+    position: absolute;
+}
+
 .search_box button{
-    position: relative;
+    position: absolute;
     width : 200px;
     height : 78px;
-    bottom : 79px;
+    top:0;
     left : 610px;
     background-color: #FF7100;
     border-radius: 35px;
@@ -46,10 +51,29 @@
     color : white;
     font-weight: 600;
     cursor: pointer;
+    z-index: 11;
 }
 .search_box button:hover{
     background-color: #f16c00;
 }
+
+#auto-search{
+    width : 800px;
+    background-color: white;
+    position: absolute;
+    top:25px;
+    left: 5px;
+    z-index: 0;
+    padding-top: 60px;
+    font-size: 30px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+
+.auto-search-content{
+    margin: 10px 0 0 10px;
+}
+
 
 .content_wrapper{
     width: 1260px;
@@ -80,31 +104,34 @@
     margin-top: 30px;
 }
 
+
 .recommend_content::-webkit-scrollbar{
     display: none;
 }
 
 .left{
     position: absolute;
-    top : 130px;
-    left : 0px;
+    top : 100px;
+    left : 20px;
     width : 50px;
-    height : 150px;
+    height : 50px;
     background-color: rgb(0,0,0,0.4);
-    display: none;
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     color : white;
     z-index: 10;
+    border-radius: 25px;
 }
 
 .right{
     position: absolute;
-    top : 130px;
-    left : 1210px;
+    top : 100px;
+    left : 1190px;
     width : 50px;
-    height : 150px;
+    height : 50px;
+    border-radius: 25px;
     background-color: rgb(0,0,0,0.4);
     display: flex;
     flex-direction: row;
@@ -114,10 +141,14 @@
     z-index: 10;
 }
 
+.slider_wrap{
+
+}
+
 .recommend_card{
     display: inline-block;
     margin:  50px 10px 0 10px;
-    width: 250px;
+    width: 350px;
     height: 150px;
     background-image: url("/static/img/333417_1640610154368611.jpg");
     background-repeat: no-repeat;
@@ -128,15 +159,7 @@
     border-radius: 10px;
 }
 
-.recommend_card:hover{
-    transform: translate3d(-50px, 0, 0);
-    z-index: 1;
-}
-
 
 .swiper-button-disabled{
     display:none;
-}
-.swiper-slide:hover{
-    transform: translateY(-50px);
 }
