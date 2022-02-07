@@ -8,6 +8,8 @@ from .decorators import login_message_required, admin_required, logout_message_r
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from .models import Store
+from favorite.models import Favorite
+
 
 def main(request):  # 메인 화면
     storebox = []
@@ -46,9 +48,12 @@ def ajax_find_id_view(request):
 def findpw(request):
     return render(request, 'find-pw.html', {})
 
-def profile(request):
-    return render(request, 'profile.html', {})
+def profile(request, id):
+    all_Store = Store.objects.filter(id=id).order_by('id')
+    # kind_of_food = Store.objects.filter('kind_of_food')
+    # foods = kind_of_food.split(',')
+    return render(request, 'profile.html', {'stores' : all_Store},)
 
-def test(request):
+def test(request): #체크박스 값들 받아오는것.
     a=request.POST.getlist('food')
     return a
