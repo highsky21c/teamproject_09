@@ -112,3 +112,42 @@ def hate(request):
     context = {'hates_count':contents.count_hates_user(), 'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")
 
+@login_required
+@require_POST
+def cmt_like(request):
+    pk = request.POST.get('pk', None)
+    contents_cmt = ContentsComment.objects.get(pk=pk)
+    user = request.user
+    print("pk:",pk)
+    print("tw:",contents_cmt)
+    print("user:",user)
+
+    if contents_cmt.cmt_likes_user.filter(id=user.id).exists():
+        contents_cmt.cmt_likes_user.remove(user)
+        message = '좋아요 취소'
+    else:
+        contents_cmt.cmt_likes_user.add(user)
+        message = '좋아요'
+
+    context = {'cmt_likes_count':contents_cmt.cmt_count_likes_user(), 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+@login_required
+@require_POST
+def cmt_hate(request):
+    pk = request.POST.get('pk', None)
+    contents_cmt = ContentsComment.objects.get(pk=pk)
+    user = request.user
+    print("pk:",pk)
+    print("tw:",contents_cmt)
+    print("user:",user)
+
+    if contents_cmt.cmt_hates_user.filter(id=user.id).exists():
+        contents_cmt.cmt_hates_user.remove(user)
+        message = '싫어요 취소'
+    else:
+        contents_cmt.cmt_hates_user.add(user)
+        message = '싫어'
+
+    context = {'cmt_hates_count':contents_cmt.cmt_count_hates_user(), 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")

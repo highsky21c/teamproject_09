@@ -34,7 +34,6 @@ class ContentsModel(models.Model):
         return self.hates_user.count()
 
 
-
 class ContentsComment(models.Model):
     class Meta:
         db_table = "comment"
@@ -43,3 +42,21 @@ class ContentsComment(models.Model):
     comment = models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    cmt_likes_user = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name='cmt_likes_user'
+    )
+    cmt_hates_user = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name='cmt_hates_user'
+    )
+
+    def cmt_count_likes_user(self):
+        return self.cmt_likes_user.count()
+
+    def cmt_count_hates_user(self):
+        return self.cmt_hates_user.count()
+
