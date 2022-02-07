@@ -121,7 +121,6 @@ function load_search_result(){
         url: '/home/load_search',
         data: {'target': txt},
         success: function(response){
-
         }
     })
 }
