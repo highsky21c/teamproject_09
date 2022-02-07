@@ -47,7 +47,7 @@ def sign_up_view(request): # 회원가입 화면이 실행될 때,
             else: #중복이 아니면
 
                 UserModel.objects.create_user(username=username, password=password, email=email, bio=bio, like_food=json_checklist ) #유저생성
-                return redirect('/sign-in') # 회원가입(사용자 저장) 완료후 로그인페이지로 이동
+                return redirect('/sign-in/') # 회원가입(사용자 저장) 완료후 로그인페이지로 이동
 
 
 def sign_in_view(request): # 로그인 화면이 실행될 때,
@@ -62,10 +62,10 @@ def sign_in_view(request): # 로그인 화면이 실행될 때,
         if me is not None: #사용자가 있다면(is not None)
             auth.login(request, me) #변수 me 정보로 로그인
             print('login 성공!')
-            return redirect('/user/') # 기본url(기본페이지)
+            return redirect('/') # 기본url(기본페이지)
         else: #없다면
             print('login 실패!')
-            return redirect('/sign-in') # 로그인 페이지로
+            return redirect('/sign-in/') # 로그인 페이지로
     elif request.method == 'GET':
         user = request.user.is_authenticated  # 유저가 로그인&인증이 되었는 지 모두 확인
         if user: #user가 있으면

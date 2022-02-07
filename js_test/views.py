@@ -74,7 +74,7 @@ def test(request):
     return a
 
 
-def Save_Store_Data(request):
+def test_Store_data(request):
     if len(SaveStore.objects.all()) != 0:
         return HttpResponse('이미처리되었습니다.')  # 나중에 render로 바로 홈으로
     else:

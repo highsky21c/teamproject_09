@@ -13,9 +13,9 @@ def home(request):
     user = request.user.is_authenticated  # 사용자가 인증을 받았는지 (로그인이 되어있는지)
     #print("user:",user) True 라고 나옴
     if user:
-        return redirect('/contents')
+        return redirect('/contents/')
     else:
-        return redirect('/sign-in')
+        return redirect('/sign-in/')
 
 
 def contents(request):
@@ -25,7 +25,7 @@ def contents(request):
             all_contents = ContentsModel.objects.all().order_by('-created_at')
             return render(request, 'contents/home1.html', {'contents': all_contents})
         else:  # 로그인이 되어 있지 않다면
-            return redirect('/sign-in')
+            return redirect('/sign-in/')
 
     elif request.method == 'POST':  # 요청 방식이 POST 일때
         user = request.user  # 현재 로그인 한 사용자를 불러오기
@@ -34,14 +34,14 @@ def contents(request):
         my_contents.subject = request.POST.get('my-subject','')
         my_contents.content = request.POST.get('my-content', '')  # 모델에 글 저장, 없으면 공백으로 적어라
         my_contents.save()
-        return redirect('/contents')
+        return redirect('/contents/')
 
 
 @login_required
 def delete_contents(request, id):
     my_contents = ContentsModel.objects.get(id=id)
     my_contents.delete()
-    return redirect('/contents')
+    return redirect('/contents/')
 
 @login_required
 def detail_contents(request, id):
