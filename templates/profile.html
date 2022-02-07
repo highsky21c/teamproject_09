@@ -24,133 +24,46 @@
         </div>
         <p class="box_title">username님의 즐겨찾기</p>
         <div id="pick_contents_container"><!--조건문쓰자~ 3개이상일때, 3개보다 작을때-->
-            <div id="store_box">
+            {% for store in stores %}
+                <div id="store_box">
                 <div id="img_box">
                     <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
                 </div>
                 <div id="store_desc_wrapper">
-                    <p id="store_name" class="s_name">가게이름</p>
+                    <p id="store_name" class="s_name">{{ store.store_name}}</p>
                     <div class="desc-box">
                         <div class="left_desc">
-                            <p id="store_address" class="descs">주소: 00시 00구</p>
-                            <p id="store_phonenum"  class="descs">전화번호 : 000-000-0000</p>
-                            <p id="price" class="descs">가격대: n만원대</p>
+                            <p id="store_address" class="descs">주소: {{ store.address }}</p>
+                            <p id="store_phonenum"  class="descs">전화번호 : {{ store.phone_num }}</p>
+                            <p id="price" class="descs">가격대: {{ store.price_range }}</p>
                         </div>
                         <div class="right_desc">
-                            <p id="store_worktime" class="descs">운영시간:00:00~00:00</p>
-                            <p id="menu" class="descs">메뉴: 0000</p>
+                            {% if store.operating_time == '' and store.menu == ''%}
+                                <p id="store_worktime" class="descs"> 운영시간:운영시간 정보가 없습니다.</p>
+                                <p id="menu" class="descs"> 메뉴 : 메뉴정보가 없습니다.</p>
+                            {% elif store.menu == '' %}
+                                <p id="store_worktime" class="descs">운영시간:{{ store.operating_time}}</p>
+                                <p id="menu" class="descs">메뉴: 메뉴정보가 없습니다.</p>
+                            {% elif  store.operating_time == '' %}
+                                <p id="store_worktime" class="descs">운영시간: 운영시간 정보가 없습니다.</p>
+                                <p id="menu" class="descs">메뉴: {{ store.menu }}</p>
+                            {% else %}
+                                <p id="store_worktime" class="descs">운영시간:{{ store.operating_time}}</p>
+                                <p id="menu" class="descs">메뉴: {{ store.menu }}</p>
+                            {% endif %}
                         </div>
                     </div>
                     <div id="tags"><!--얘도조건문 쓰자!-->
-                        <p id="tag"># 음식종류</p>
+                            <p id="tag"># 음식분류</p>
                     </div>
                 </div>
             </div>
-            <div id="store_box">
-                <div id="img_box">
-                    <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
-                </div>
-                <div id="store_desc_wrapper">
-                    <p id="store_name" class="s_name">가게이름</p>
-                    <div class="desc-box">
-                        <div class="left_desc">
-                            <p id="store_address" class="descs">주소: 00시 00구</p>
-                            <p id="store_phonenum"  class="descs">전화번호 : 000-000-0000</p>
-                            <p id="price" class="descs">가격대: n만원대</p>
-                        </div>
-                        <div class="right_desc">
-                            <p id="store_worktime" class="descs">운영시간:00:00~00:00</p>
-                            <p id="menu" class="descs">메뉴: 0000</p>
-                        </div>
-                    </div>
-
-
-
-                    <div id="tags"><!--얘도조건문 쓰자!-->
-                        <p id="tag"># 음식종류</p>
-                    </div>
-                </div>
-            </div>
-            <div id="store_box">
-                <div id="img_box">
-                    <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
-                </div>
-                <div id="store_desc_wrapper">
-                    <p id="store_name" class="s_name">가게이름</p>
-                    <div class="desc-box">
-                        <div class="left_desc">
-                            <p id="store_address" class="descs">주소: 00시 00구</p>
-                            <p id="store_phonenum"  class="descs">전화번호 : 000-000-0000</p>
-                            <p id="price" class="descs">가격대: n만원대</p>
-                        </div>
-                        <div class="right_desc">
-                            <p id="store_worktime" class="descs">운영시간:00:00~00:00</p>
-                            <p id="menu" class="descs">메뉴: 0000</p>
-                        </div>
-                    </div>
-
-
-
-                    <div id="tags"><!--얘도조건문 쓰자!-->
-                        <p id="tag"># 음식종류</p>
-                    </div>
-                </div>
-            </div>
-            <div id="store_box">
-                <div id="img_box">
-                    <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
-                </div>
-                <div id="store_desc_wrapper">
-                    <p id="store_name" class="s_name">가게이름</p>
-                    <div class="desc-box">
-                        <div class="left_desc">
-                            <p id="store_address" class="descs">주소: 00시 00구</p>
-                            <p id="store_phonenum"  class="descs">전화번호 : 000-000-0000</p>
-                            <p id="price" class="descs">가격대: n만원대</p>
-                        </div>
-                        <div class="right_desc">
-                            <p id="store_worktime" class="descs">운영시간:00:00~00:00</p>
-                            <p id="menu" class="descs">메뉴: 0000</p>
-                        </div>
-                    </div>
-
-
-
-                    <div id="tags"><!--얘도조건문 쓰자!-->
-                        <p id="tag"># 음식종류</p>
-                    </div>
-                </div>
-            </div>
-            <div id="store_box">
-                <div id="img_box">
-                    <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
-                </div>
-                <div id="store_desc_wrapper">
-                    <p id="store_name" class="s_name">가게이름</p>
-                    <div class="desc-box">
-                        <div class="left_desc">
-                            <p id="store_address" class="descs">주소: 00시 00구</p>
-                            <p id="store_phonenum"  class="descs">전화번호 : 000-000-0000</p>
-                            <p id="price" class="descs">가격대: n만원대</p>
-                        </div>
-                        <div class="right_desc">
-                            <p id="store_worktime" class="descs">운영시간:00:00~00:00</p>
-                            <p id="menu" class="descs">메뉴: 0000</p>
-                        </div>
-                    </div>
-
-
-
-                    <div id="tags"><!--얘도조건문 쓰자!-->
-                        <p id="tag"># 음식종류</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
 
         </div>
         <p class="box_title">이런 가게들은 어때요?</p>
-        <div id="recommend_wrapper"><!--추천박스-->
-            <div class="box">
+        <div id="recommend_container"><!--추천박스-->
+            <div class="upper_box">
                 <div class="recommend_imgbox"><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
                     <img id="recommend_img" class="rcm_img" src="/static/img/d.jpg">
                 </div>
