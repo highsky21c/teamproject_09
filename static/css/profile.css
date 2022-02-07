@@ -99,7 +99,8 @@ body{
     margin-left: 10px;
 }
 #tags{
-    width:600px
+    width:1000px;
+    display:flex;
 }
 #tag{
     margin-top: 10px;
@@ -110,18 +111,25 @@ body{
     line-height: 30px;
     padding-left: 5px;
 }
-#recommend_wrapper{
+#recommend_container{
     width:1260px;
     background-color: #f5dd5d;
     border: 1px double lightgrey;
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     height: 500px;
+    }
+.upper_box{
+    width:1100px;
+    height: 250px;
 }
 .box{
+    margin: 30px 0 0 10px;
     position: relative;
 }
 
-.recommend_imgbox{
+.recommend_img_box{
     background-image: url("/static/img/default.png");
     width:300px;
     height:200px;
@@ -131,15 +139,17 @@ body{
     width:280px;
     height:180px;
     margin:10px;
+    position: relative;
+    z-index: 4;
 }
 .recommend_descbox{
-    width:300px;
-    height:200px;
+    width:280px;
+    height:180px;
     margin:20px;
-    top:50px;
-    left:50px;
+    top:-10px;
+    left:-10px;
     position: absolute;
-    z-index: 3;
+    z-index: 5;
     background-color: white;
     opacity: 80%;
 }

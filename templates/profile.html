@@ -4,6 +4,7 @@
 
 {% block head%}
 <link rel="stylesheet" href="/static/css/profile.css"> <!--css적용파일-->
+<script type="text/javascript" src="/static/js/find-id.js"></script><!--js적용파일-->
 {% endblock %}
 
 {% block content%}
@@ -63,7 +64,29 @@
         </div>
         <p class="box_title">이런 가게들은 어때요?</p>
         <div id="recommend_container"><!--추천박스-->
-            <div class="upper_box">
+            <div class="box">
+                <div class="recommend_imgbox" ><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
+                    <img id="recommend_img"  class="rcm_img" src="/static/img/d.jpg">
+                </div>
+                <div class="recommend_descbox" id="up_1" >
+                    <p class="s_descs">가게이름:</p>
+                    <p class="s_descs">주소:</p>
+                    <p class="s_descs">가격대:</p>
+                    <p class="s_descs">음식종류:</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="recommend_imgbox"><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
+                    <img id="recommend_img" class="rcm_img" src="/static/img/d.jpg">
+                </div>
+                <div class="recommend_descbox">
+                    <p class="s_descs">가게이름:</p>
+                    <p class="s_descs">주소:</p>
+                    <p class="s_descs">가격대:</p>
+                    <p class="s_descs">음식종류:</p>
+                </div>
+            </div>
+            <div class="box">
                 <div class="recommend_imgbox"><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
                     <img id="recommend_img" class="rcm_img" src="/static/img/d.jpg">
                 </div>
@@ -96,6 +119,41 @@
                     <p class="s_descs">음식종류:</p>
                 </div>
             </div>
+            <div class="box">
+                <div class="recommend_imgbox"><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
+                    <img id="recommend_img" class="rcm_img" src="/static/img/d.jpg">
+                </div>
+                <div class="recommend_descbox">
+                    <p class="s_descs">가게이름:</p>
+                    <p class="s_descs">주소:</p>
+                    <p class="s_descs">가격대:</p>
+                    <p class="s_descs">음식종류:</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="recommend_imgbox"><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
+                    <img id="recommend_img" class="rcm_img" src="/static/img/d.jpg">
+                </div>
+                <div class="recommend_descbox">
+                    <p class="s_descs">가게이름:</p>
+                    <p class="s_descs">주소:</p>
+                    <p class="s_descs">가격대:</p>
+                    <p class="s_descs">음식종류:</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="recommend_imgbox"><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
+                    <img id="recommend_img" class="rcm_img" src="/static/img/d.jpg">
+                </div>
+                <div class="recommend_descbox">
+                    <p class="s_descs">가게이름:</p>
+                    <p class="s_descs">주소:</p>
+                    <p class="s_descs">가격대:</p>
+                    <p class="s_descs">음식종류:</p>
+                </div>
+            </div>
+
+
 
         </div>
     </div>

@@ -10,5 +10,5 @@ urlpatterns = [
     path('find-id/', views.findid, name='find-id'),
     path('find-id/find/', views.ajax_find_id_view, name='ajax_id'),
     path('find-pw', views.findpw, name='find-pw'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/<str:id>/', views.profile, name='profile'),
 ]
