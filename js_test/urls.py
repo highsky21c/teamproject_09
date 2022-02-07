@@ -4,7 +4,7 @@ from js_test import views
 
 urlpatterns = [
     path('', views.main, name='home'),
-    path('detail', views.detail, name='detail'),
+    path('detail/<str:store_name>', views.detail, name='detail'),
     path('sign-up/', views.join, name='sign-up'),
     path('sign-in/', views.login, name='login'),
     path('find-id/', views.findid, name='find-id'),

@@ -54,37 +54,42 @@
                         <div class='info_icon'>
                             <i class="fas fa-store"></i>
                         </div>
-                        <p id="store_name">오창동 남향짐</p>
+                        <p id="store_name">{{ store.store_name }}</p>
                     </div>
                     <div class='about_info_row'>
                         <div class='info_icon'>
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <p id="store_address">서울특별시 중구 마른내로 114</p>
+                        <p id="store_address">{{ store.address }}</p>
                     </div>
                     <div class='about_info_row'>
                         <div class='info_icon'>
                             <i class="fas fa-phone"></i>
                         </div>
-                        <p>02-999-9999</p>
+                        <p>{{ store.phone_num }}</p>
                     </div>
                     <div class='about_info_row'>
                         <div class='info_icon'>
                             <i class="fas fa-utensils"></i>
                         </div>
-                        <p>감자탕 냉면 만두 볶음밥</p>
+                        <p>{{ store.menu }}</p>
                     </div>
                     <div class='about_info_row'>
                         <div class='info_icon'>
                             <i class="fas fa-dollar-sign"></i>
                         </div>
-                        <p>평균 2만원대</p>
+                        <p>{{ store.price_range }}</p>
                     </div>
                     <div class='about_info_row'>
                         <div class='info_icon'>
                             <i class="far fa-calendar-alt"></i>
                         </div>
-                        <p>연중 무휴</p>
+                        <div>
+                            <p style="margin-top: 10px;">영업시간 : {{ store.operating_time }}</p>
+                            <p style="margin-top: 10px;">쉬는 시간 : {{ store.break_time }}</p>
+                            <p style="margin-top: 10px;">마지막 주문 : {{ store.last_order }}</p>
+                        </div>
+
                     </div>
                     <div class='about_info_row'>
                         <div class='info_icon'>
@@ -108,30 +113,32 @@
             </div>
             <div class='hr'></div>
             <div class='content_comment_wrap'>
-                {% for comment in container %}
+                {% for comment in comments %}
 
-                <div class='comment_row'>
-                    <div class='comment_profile'>
-                        <img src='{{comment.avatar}}'>
-                    </div>
-                    <div class='comment_middle'>
-                        <div class='comment_user_name'>
-                            <p> {{comment.username}}  {{ forloop.counter0 }}</p>
+                    <div class='comment_row'>
+                        <div class='comment_profile'>
+                            <img src='{{ comment.avatar }}'>
                         </div>
-                        <div class='hr' style=''></div>
-                        <div class='comment_content'>
-                            <p>
-                                {{ comment.comment_content }}
-                            </P>
+                        <div class='comment_middle'>
+                            <div class='comment_user_name'>
+                                <p> {{ comment.username }} {{ forloop.counter0 }}</p>
+                            </div>
+                            <div class='hr' style=''></div>
+                            <div class='comment_content'>
+                                <p>
+                                    {{ comment.comment_content }}
+                                </P>
+                            </div>
+                        </div>
+                        <div class='comment_like' id="comment_{{ forloop.counter0 }}" onclick="comment_like(this.id)">
+                            <div class='comment_like_box'>
+                                <i class="fas fa-thumbs-up fa-3x comment_like_on" id='comment_{{ forloop.counter0 }}_on'
+                                   style="display: none; color: white;"></i>
+                                <i class="far fa-thumbs-up fa-3x comment_like_off"
+                                   id='comment_{{ forloop.counter0 }}_off' style="display:flex; color: white;"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class='comment_like' id="comment_{{ forloop.counter0 }}" onclick="comment_like(this.id)">
-                        <div class='comment_like_box'>
-                            <i class="fas fa-thumbs-up fa-3x comment_like_on" id='comment_{{ forloop.counter0 }}_on' style="display: none; color: white;"></i>
-                            <i class="far fa-thumbs-up fa-3x comment_like_off" id='comment_{{ forloop.counter0 }}_off' style="display:flex; color: white;"></i>
-                        </div>
-                    </div>
-                </div>
                 {% endfor %}
 
                 <div class='more_button' id="more_button" onclick="more(this.id)">
