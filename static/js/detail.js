@@ -1,12 +1,12 @@
 // csrf 토큰 받아오는 과정 - Ajax 사용하기 위함
 function getCookie(name) {
     var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
+    if (document.cookie && document.cookie !== '') {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = jQuery.trim(cookies[i]);
             // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;
             }
@@ -219,7 +219,6 @@ function write_comments(){
     const textarea = document.getElementById('comment_text')
     let text = textarea.value
     let scroll_value = $(document).scrollTop();
-    console.log(scroll_value)
     $.ajax({
         type:'post',
         url: '/comment/write',
@@ -228,7 +227,24 @@ function write_comments(){
             console.log(response['result'])
         }
     })
-    window.location.reload()
+
+    let comments = document.getElementsByClassName('comment_row')
+    for(let i=0; i<comments.length;i++){
+        comments[i].style.display='flex'
+    }
+    document.getElementById('more_button').style.display ='none'
+    let a = $('.comment_row').clone()[0]
+
+    a.children[0].children[0].src ='/'
+    a.children[1].children[0].children[0].innerText ='username  '+comments.length
+    a.children[1].children[2].children[0].innerText = text
+    a.children[2].id = 'comment_'+ comments.length
+    a.children[2].children[0].children[0].id = 'comment_'+comments.length +'_on'
+    a.children[2].children[0].children[1].id = 'comment_'+comments.length +'_off'
+    console.log(a.children[2].children[0].children[1].id)
+
+    comments[comments.length-1].after(a)
+
     window.scrollTo(0, scroll_value)
     textarea.value = ''
 }
