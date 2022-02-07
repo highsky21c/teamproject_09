@@ -8,6 +8,7 @@ from .decorators import login_message_required, admin_required, logout_message_r
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from .models import Store
+from favorite.models import Favorite
 
 def main(request):  # 메인 화면
     storebox = []
@@ -15,14 +16,19 @@ def main(request):  # 메인 화면
         store = {'photo': '/static/img/333417_1640610154368611.jpg', 'store': i}
         storebox.append(store)
 
-
-
     return render(request, 'home.html', {'container': storebox})
 
 
 def detail(request, store_name):
+    # user = request.user
+    user = 'js'
     store = Store.objects.filter(store_name=store_name)[0]
-    print(type(store.phone_num))
+    favorite = Favorite.objects.filter(user=user, content=store_name)
+    if len(favorite)==0:
+        favorite_value = 'off'
+    else:
+        favorite_value = 'on'
+
     comments = []
     for i in range(10):
         comment = {'avatar': '/static/img/333417_1640610154368611.jpg', 'username': 'username', 'comment_id': i, 'comment_content':'asdfadfadfadf'}
@@ -31,7 +37,7 @@ def detail(request, store_name):
 
 
 def join(request):
-    return render(request, 'sign-up.html',{})
+    return render(request, 'sign-up.html', {})
 
 
 def login(request):
@@ -54,8 +60,10 @@ def ajax_find_id_view(request):
 def findpw(request):
     return render(request, 'find-pw.html', {})
 
+
 def profile(request):
     return render(request, 'profile.html', {})
+
 
 def test(request):
     a=request.POST.getlist('food')
