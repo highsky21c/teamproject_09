@@ -115,6 +115,7 @@ $(function () {
 
 function load_search_result(){
     let txt = $('#search').val();
+    window.scrollTo(0,800)
     $.ajax({
         type: 'post',
         url: '/home/load_search',
