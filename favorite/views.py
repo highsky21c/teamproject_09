@@ -3,6 +3,7 @@ from .models import Favorite
 import json
 from django.core import serializers
 from django.http import JsonResponse
+from user.models import UserModel
 
 
 # Create your views here.
@@ -10,7 +11,7 @@ def load_favorite(request):
     # user = request.user.is_authenticated
     user = 'js'
     my_favorite = Favorite.objects.filter(user=user).order_by('date')
-    print(my_favorite)
+    print(my_favorite.user)
     json_favorite = serializers.serialize("json", my_favorite)
     if my_favorite.count() == 0:
         context = {
