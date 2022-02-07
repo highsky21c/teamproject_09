@@ -1,14 +1,16 @@
+import json
 import random
 
 import requests
 from bs4 import BeautifulSoup
-import simplejson as json
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import SaveStore
 # Create your views here.
 
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
+
+main_category = ['한식', '일식', '양식', '중식', '기타나라음식', ' 주류', '디저트']
 
 main_sub_category = {
     '0': ['오리요리', '퓨전 한식', '기타 한식', '백반', '찌개', '철판 요리', '해산물요리', '탕', '전골', '국수', '전통한식', '뷔페'],
@@ -24,47 +26,75 @@ main_sub_category = {
 
 # 메인페이지
 def Show_Store(request):
+    input_foods = []
+
     if request.POST:
         input_food = request.POST.get('input_food', '')
+        input_foods.append(input_food)
+        print('입력 값', input_food)
 
-        # 대분류로 데이터를 추론
-        main_category_model = Doc2Vec.load('static/model/main_category_model')
-        main_infer_data = main_category_model.infer_vector(input_food)
-        most_similar_docs = main_category_model.docvecs.most_similar([main_infer_data], topn=1)
+        # 대분류 추론
+
+        # 대분류 모델 학습
+        main_documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(main_category)]
+        main_category_model = Doc2Vec(main_documents, vector_size=150, window=10, epochs=300, min_count=0, workers=4)
+        main_infer_data = main_category_model.infer_vector(input_foods)
+        main_most_similar_docs = main_category_model.docvecs.most_similar([main_infer_data], topn=1)
+
+
+        # "main_most_similar_docs[0][0]"는 유사도 결과의 해당 인덱스 번호를 나타냄
+        # 만약 입력값과 '디저트'의 유사도가 높은 것으로 나왔다. -> main_most_similar_docs[0][0] == 6
+        # "main_most_similar_docs"는 "sub_most_similar_docs"에서 "key"값으로 사용
+
+        index = main_most_similar_docs[0][0]
+        print('index', index)
+        # 현재 index는 type이 int 이므로 key값으로 사용을 하려면, 문자열로 변환(str())을 해야함
 
         # 대분류에서 소분류로 분류
-        sec_documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(main_sub_category[most_similar_docs[0[0]]])]
+        sec_documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(main_sub_category[str(index)])]
         sub_category_model = Doc2Vec(sec_documents, vector_size=100, window=3, epochs=10, min_count=0, workers=4)
-        sec_inferred_doc_vec = sub_category_model.infer_vector(input_food)
+        sec_inferred_doc_vec = sub_category_model.infer_vector(input_foods)
         sub_most_similar_docs = sub_category_model.docvecs.most_similar([sec_inferred_doc_vec], topn=3)
+        print('sub_most_similar_docs[0][0]', sub_most_similar_docs[0][0])
 
         recommand_stores = []
         for sec_index, sec_similarity in sub_most_similar_docs:
-            print('subcategory :', main_sub_category[most_similar_docs[0][0]][sec_index], '//', 'similarity:',
-                  sec_similarity)
+            print('main_sub_category[index]', main_sub_category[str(index)])
+            print('subcategory :', main_sub_category[str(index)][sec_index], '//', 'similarity:', sec_similarity)
 
-            # "main_sub_category[most_similar_docs[0][0]][sec_index]" 는 main_sub_category의 @번째(0~6)에 해당하는 리스트 들 중
-            # sec_index번째의 요소임
+            # db에서 데이터를 가져온 뒤, key에 해당하는 값을 recommand_stores에 저장
+            # 아래의 "key"는 이제 db에서 추천할 음식종류를 가져오는 열쇠역할
 
-            # key값을 디코딩하여, db에서 해당하는 데이터를 가져옴
-            key = json.dumps(most_similar_docs[0][0][sec_index])
-            store = SaveStore.objects.filter(kind_of_food=main_sub_category[key])
+            key = main_sub_category[str(index)][sec_index]
+            print('key', key)
 
-            decode_store = json.decoder.JSONDecoder()
-            decoded_store = decode_store.decode(store)
+            # 가게 정보를 모두 가져옴
+            # 모든 객체(200개)를 뽑아옴
+            stores = SaveStore.objects.values()
 
-            recommand_stores.append(decoded_store)
+            for store in stores:
+                store = json.loads(store['store'])
+                if key in store['kind_of_food']:
+                    recommand_stores.append(store)
 
-        return render(request, '../storeapp/temp_home.html', stores_POST=recommand_stores)
+        return render(request, 'storeapp/temp_home.html', {'stores_POST': recommand_stores})
 
     else:
         # GET일 경우, 랜덤으로 10개 뽑아 보여줌.
         ran_stores = []
         for _ in range(11):
-            idx = random.randrange(0, 201)
-            random_store = SaveStore.objects.get(id=idx)
+            idx = random.randrange(1, 201)
+            random_store = SaveStore.objects.values().get(pk=idx)
+            print('random_store', random_store)
+            rand_store = random_store['store']
 
-        return render(request, '../storeapp/temp_home.html', store_GET=ran_stores)
+            # 디코딩
+            decoded_store = json.loads(rand_store)
+            print(decoded_store)
+
+            ran_stores.append(decoded_store)
+
+        return render(request, 'storeapp/temp_home.html', {'store_GET': ran_stores})
 
 
 def Save_Store_Data(request):
@@ -240,4 +270,4 @@ def Save_Store_Data(request):
                 temp_object.store = json.dumps(store_detail)
                 temp_object.save()
                 # print(page_detail)
-        return HttpResponse('성공')  # 나중에 rneder()로 메인페이지로 연결
+        return HttpResponse('성공')  # 나중에 render()로 메인페이지로 연결

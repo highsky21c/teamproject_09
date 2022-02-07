@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
 <head>
     <meta charset="UTF-8">
     <title>temp_home</title>
@@ -10,17 +10,24 @@
 </h5>
 <div>
 
-    <form action=" {% url 'storeapp: ' %}" method="post">
+    <form action=" {% url 'storeapp:home' %}" method="post">
         {% csrf_token %}
-        <input type="text" placeholder="키워드를입력하세요">
-        <input type="submit" name="input_food">
+        <input type="text" placeholder="키워드를입력하세요" name="input_food">
+        <input type="submit" name="submit_food">
     </form>
 
     <div>
         {% if stores_POST %}
             {% for store in stores_POST %}
                 <div>
-                    {{ store['store_name'] }}는 어때요?
+                    {{ store.store_name }}는 어때요?
+                </div>
+            {% endfor %}
+
+        {% else %}
+            {% for store in store_GET %}
+                <div>
+                    {{ store.store_name }}는 어때요?
                 </div>
             {% endfor %}
         {% endif %}
