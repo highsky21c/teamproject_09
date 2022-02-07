@@ -39,7 +39,7 @@ def sign_up_view(request): #회원가입 화면이 실행될 때,
             exist_email = get_user_model().objects.filter(email=email)
             if exist_username: # ID 중복이면
 
-                return render(request, 'sign-up.html', {'error' : '아이디 존재'}) #회원가입화면
+                return render(request, 'login.html', {'error' : '아이디 존재'}) #회원가입화면
             elif exist_email:  # email 중복이면
 
                 return render(request, 'sign-up.html', {'error' : '이메일 존재'}) #회원가입화면
