@@ -12,7 +12,11 @@ def main(request):  # 메인 화면
 
 
 def detail(request):
-    return render(request, 'detail.html', {})
+    storebox = []
+    for i in range(10):
+        store = {'avatar': '/static/img/333417_1640610154368611.jpg', 'username': 'username', 'comment_id': i, 'comment_content':'asdfadfadfadf'}
+        storebox.append(store)
+    return render(request, 'detail.html', {'container': storebox})
 
 def join(request):
     return render(request, 'sign-up.html',{})

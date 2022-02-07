@@ -40,6 +40,15 @@ $(document).ready(function () {
     document.getElementById('favorite_on').style.display = 'none'
     document.getElementById('like_off').style.display = 'flex'
     document.getElementById('like_on').style.display = 'none'
+
+    var comments = document.getElementsByClassName('comment_row')
+
+    for(let i=0; i<comments.length; i++){
+        const comment = comments[0]
+        if(i>=3){
+            comments[i].style.display='none'
+        }
+    }
 });
 
 //Map Loading
@@ -147,4 +156,79 @@ function like() {
         //     }
         // })
     }
+}
+
+function comment_like(id) {
+    let check = document.getElementById(id)
+    let comment_id = id.split('_').pop()
+
+    var comment_like_on = document.getElementById('comment_'+ comment_id +'_on')
+    var comment_like_off = document.getElementById('comment_'+ comment_id +'_off')
+
+    if(comment_like_off.style.display ==='flex'){
+        comment_like_off.style.display = 'none'
+        comment_like_on.style.display = 'flex'
+    }
+    else{
+        comment_like_off.style.display = 'flex'
+        comment_like_on.style.display = 'none'
+    }
+    console.log(comment_like_on)
+
+}
+
+//슬라이더 함수
+var swiper = new Swiper(".content_photo_container", {
+    slidesPerView: 4,
+    spaceBetween: 5,
+    navigation: {
+        nextEl: ".right",
+        prevEl: ".left",
+    },
+});
+
+var swiper = new Swiper(".recommend_another", {
+    slidesPerView: 3,
+    spaceBetween: 5,
+    navigation: {
+        nextEl: ".right",
+        prevEl: ".left",
+    },
+});
+
+function more(id){
+    let comments = document.getElementsByClassName('comment_row')
+    let comment_cnt = 0
+    let more_button = document.getElementById(id)
+    for(let i =0; i<=comments.length; i++){
+        if(comments[i].style.display==='none'){
+            comment_cnt=i;
+            break;
+        }
+    }
+    for(let k=comment_cnt; k<comment_cnt+3;k++){
+        if(k>=comments.length){
+            more_button.style.display='none'
+            return
+        }
+        comments[k].style.display ='flex'
+    }
+}
+
+function write_comments(){
+    const textarea = document.getElementById('comment_text')
+    let text = textarea.value
+    let scroll_value = $(document).scrollTop();
+    console.log(scroll_value)
+    $.ajax({
+        type:'post',
+        url: '/comment/write',
+        data: {'comment': text},
+        success: function(response){
+            console.log(response['result'])
+        }
+    })
+    window.location.reload()
+    window.scrollTo(0, scroll_value)
+    textarea.value = ''
 }
