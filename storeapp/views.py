@@ -103,7 +103,7 @@ def Save_Store_Data(request):
     else:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
-        for i in range(1, 11):
+        for i in range(1,2):
 
             data_seoul = requests.get(
                 f'https://www.mangoplate.com/search/%EC%84%9C%EC%9A%B8?keyword=%EC%84%9C%EC%9A%B8&page={i}',
@@ -252,13 +252,17 @@ def Save_Store_Data(request):
 
                         elif info_title == '메뉴':
                             food_info = info.select("td > .Restaurant_MenuList > li")
-                            menu = {}
+                            menu = []
                             for idx, detail_food in enumerate(food_info):
                                 food_name = detail_food.select_one('.Restaurant_Menu').text
                                 food_price = detail_food.select_one('.Restaurant_MenuPrice').text
-                                menu[idx] = [food_name, food_price]
+                                temp = food_name + ' - ' + food_price
+                                menu.append(temp)
                             page_detail['menu'] = menu
                             store_db.menu = menu
+                            print('store_db.menu : ', menu)
+                            print('store_db.menu type : ', type(menu))
+
 
                         elif info_title == '웹 사이트':
                             use_info = info.select_one("td > a")['href']
