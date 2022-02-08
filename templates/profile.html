@@ -18,14 +18,14 @@
             <div class="user_desc">
                 <p>{{ username }}님</p>
                 <div class="counts">
+                    <p class="count"> 즐겨찾기한 가게 수: {{ favorite_store.count }}개</p><br>
                     <p class="count"> 좋아요 누른 가게 수: n개</p><br>
-                    <p class="count"> 작성한 댓글 수: n개 </p>
                 </div>
             </div>
         </div>
-        <p class="box_title">username님의 즐겨찾기</p> <!--얘가 틀이잡히면 좋아요도 같은방식-->
+        <p class="box_title">{{ username }}님의 즐겨찾기</p> <!--얘가 틀이잡히면 좋아요도 같은방식-->
         <div id="pick_contents_container">
-        {% if favorite_Store.count == 0 %}
+            {% if favorite_store.count == 0 %}
              <div id="store_box">
                 <div id="img_box">
                     <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
@@ -41,34 +41,39 @@
                             <p id="tag"># 추천 </p>
                     </div>
                 </div>
-            {% for f_store in favorite_Store %}
+             </div>
+            {% else %}
+            {% for f_store in favorite_store %}
                 <div id="store_box">
                 <div id="img_box">
-                    <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
+                    <img id="store_img" src="{{ f_store.store.pic }}"><!--대표사진-->
                 </div>
                 <div id="store_desc_wrapper">
-                    <p id="store_name" class="s_name">{{ f_store.store_name }}</p>
+                    <p id="store_name" class="s_name">{{ f_store.store.store_name }}</p>
                     <div class="desc-box">
                         <div class="left_desc">
-                            <p id="store_address" class="descs">주소: {{ f_store.address }}</p>
-                            {% if f_store.phone_num is not None %}<!--빈값이 어떻게 넘어오는지 확인-->
-                            <p id="store_phonenum"  class="descs">전화번호 : {{ f_store.phone_num }}</p>
+                            <p id="store_address" class="descs">주소: {{ f_store.store.address }}</p>
+                            {% if f_store.phone_num is not "" %}<!--빈값이 어떻게 넘어오는지 확인-->
+                                <p id="store_phonenum"  class="descs">전화번호 : {{ f_store.store.phone_num }}</p>
+                            {% else %}
+                                <p id="store_phonenum"  class="descs">전화번호 : {{ f_store.store.phone_num }}</p>
                             {% endif %}
-                            <p id="price" class="descs">가격대: {{ store.price_range }}</p>
+
+                            <p id="price" class="descs">가격대: {{ f_store.store.price_range }}</p>
                         </div>
                         <div class="right_desc">
                             {% if store.operating_time == '' and store.menu == ''%}
                                 <p id="store_worktime" class="descs"> 운영시간:운영시간 정보가 없습니다.</p>
                                 <p id="menu" class="descs"> 메뉴 : 메뉴정보가 없습니다.</p>
                             {% elif store.menu == '' %}
-                                <p id="store_worktime" class="descs">운영시간:{{ store.operating_time}}</p>
+                                <p id="store_worktime" class="descs">운영시간:{{ f_store.store.operating_time }}</p>
                                 <p id="menu" class="descs">메뉴: 메뉴정보가 없습니다.</p>
                             {% elif  store.operating_time == '' %}
                                 <p id="store_worktime" class="descs">운영시간: 운영시간 정보가 없습니다.</p>
-                                <p id="menu" class="descs">메뉴: {{ store.menu }}</p>
+                                <p id="menu" class="descs">메뉴:{{ f_store.store.menu.0 }} </p>
                             {% else %}
-                                <p id="store_worktime" class="descs">운영시간:{{ store.operating_time}}</p>
-                                <p id="menu" class="descs">메뉴: {{ store.menu }}</p>
+                                <p id="store_worktime" class="descs">운영시간:{{  f_store.store.operating_time }}</p>
+                                <p id="menu" class="descs">메뉴: {{ f_store.store.menu.0 }} </p>
                             {% endif %}
                         </div>
                     </div>
@@ -82,9 +87,9 @@
         </div>
 
         </div>
-        <p class="box_title">username님이 좋아요 누른 가게</p> <!--얘가 틀이잡히면 좋아요도 같은방식-->
+        <p class="box_title">{{ username }}님이 좋아요 누른 가게</p> <!--얘가 틀이잡히면 좋아요도 같은방식-->
         <div id="pick_contents_container">
-        {% if favorite_Store.count == 0 %}
+        {% if favorite_store.count == 0 %}
              <div id="store_box">
                 <div id="img_box">
                     <img id="store_img" src="/static/img/d.jpg"><!--대표사진-->
@@ -122,10 +127,10 @@
                                 <p id="menu" class="descs">메뉴: 메뉴정보가 없습니다.</p>
                             {% elif  store.operating_time == '' %}
                                 <p id="store_worktime" class="descs">운영시간: 운영시간 정보가 없습니다.</p>
-                                <p id="menu" class="descs">메뉴: {{ store.menu }}</p>
+                                <p id="menu" class="descs">메뉴: {{ store.menu.1 }}</p>
                             {% else %}
                                 <p id="store_worktime" class="descs">운영시간:{{ store.operating_time}}</p>
-                                <p id="menu" class="descs">메뉴: {{ store.menu }}</p>
+                                <p id="menu" class="descs">메뉴: {{ store.menu.1 }}</p>
                             {% endif %}
                         </div>
                     </div>
@@ -141,16 +146,16 @@
         </div>
         <p class="box_title">이런 가게들은 어때요?</p>
         <div id="recommend_container"><!--추천박스-->
-            {% for rd_store in random_store %}
+            {% for rd_store in recommend %}
             <div class="box">
                 <div class="recommend_imgbox" ><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
-                    <img id="recommend_img"  class="rcm_img" src="{{rd_store.pic.0}}">
+                    <img id="recommend_img"  class="rcm_img" src="{{ rd_store.pic }}"> <!--사진url앞에것만 잘라보기-->
                 </div>
                 <div class="recommend_descbox">
-                    <p class="s_descs">가게이름:{{ rd_store.store_name }}</p>
-                    <p class="s_descs">주소:{{ rd_store.address }}</p>
-                    <p class="s_descs">가격대:</p>
-                    <p class="s_descs">음식종류:</p>
+                    <p class="s_descs">가게이름: {{ rd_store.store_name }}</p>
+                    <p class="s_descs">가격대: {{ rd_store.price_range }}</p>
+                    <p class="s_descs">음식종류: {{ rd_store.kind_of_food }}</p>
+                    <p class="s_descs">주소: {{ rd_store.address}}</p>
                 </div>
             </div>
             {% endfor %}

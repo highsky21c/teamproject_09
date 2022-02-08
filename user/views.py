@@ -4,9 +4,11 @@ from django.contrib.auth import get_user_model  # 사용자가 DB안에 있는 �
 from django.shortcuts import render, redirect  # render는 html 보여주는 것.
 from .models import UserModel  # 동일한 위치에 있는 models 파일에서 UserModel을 import
 from django.contrib.auth.decorators import login_required
+from django.core.serializers.json import DjangoJSONEncoder
 import json
 from favorite.models import Favorite
 from storeapp.models import Store
+from django.http import HttpResponse
 import random
 
 def sign_up_view(request):  # 회원가입 화면이 실행될 때,
@@ -78,20 +80,33 @@ def sign_in_view(request):  # 로그인 화면이 실행될 때,
         else:  # 없으면
             return render(request, 'login.html')  # 로그인화면
 
-
 @login_required  # 사용자가 로그인되어야 가능
 def logout(request):
     auth.logout(request)
-    return redirect('/')  # tweet의 home -> 사용자가 없으면 -> 로그인 화면
+    return redirect('/') #tweet의 home -> 사용자가 없으면 -> 로그인 화면
 
+def findid(request):
+    return render(request, 'find-id.html')
+
+def ajax_find_id_view(request):
+    name = request.POST.get('name')
+    email = request.POST.get('email')
+    result_id = UserModel.objects.get(last_name=name, email=email)
+
+    return HttpResponse(json.dumps({"result_id": result_id.username}, cls=DjangoJSONEncoder),
+                        content_type="application/json")
 
 @login_required
 def load_my_profile(request):
+    username = request.user.last_name
     user_id = request.user.id
     user = UserModel.objects.get(id=user_id)
     my_favorite = Favorite.objects.filter(user=user).order_by('date')
-    menu_list = []
     for favorite in my_favorite:
-        menu_list.append(json.loads(favorite.store.menu.replace('\'', '\"')))
-    store_list = Store.objects.order_by('?')[0:5]
-    return render(request, 'profile.html', {'favorite_store': my_favorite, 'menu_list': menu_list, 'recommend': store_list})
+        favorite.store.pic = json.loads(favorite.store.pic.replace('\'', '\"'))[0]
+        favorite.store.menu = json.loads(favorite.store.menu.replace('\'', '\"'))
+    store_list = Store.objects.order_by('?')[0:8]
+    for store in store_list:
+        store.pic = json.loads(store.pic.replace('\'', '\"'))[0]
+
+    return render(request, 'profile.html', {'favorite_store': my_favorite, 'recommend': store_list, 'username':username})
