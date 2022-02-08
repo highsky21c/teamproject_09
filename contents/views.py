@@ -20,19 +20,12 @@ def home(request):
 
 
 def contents(request):
-    if request.method == 'GET':  # 요청하는 방식이 GET 방식인지 확인하기
-        user = request.user.is_authenticated  # 사용자가 로그인이 되어 있는지 확인하기
-        if user:  # 로그인 한 사용자라면
+    user = request.user.is_authenticated  # 사용자가 로그인이 되어 있는지 확인하기
+    if user:  # 로그인 한 사용자라면
+        return render(request, 'home.html', {})
+    else:  # 로그인이 되어 있지 않다면
+        return redirect('/sign-in/')
 
-            return render(request, 'home.html', {})
-        else:  # 로그인이 되어 있지 않다면
-            return redirect('/sign-in/')
-    elif request.method == 'POST':  # 요청 방식이 POST 일때
-        search_words = request.POST.get['search_words']
-
-        all_stores = Store().objects.filter(kind_of_food=search_words)
-
-        return HttpResponse(json.dumps(all_stores), content_type="application/json")
 
 
 @login_required

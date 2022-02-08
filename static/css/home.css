@@ -97,7 +97,7 @@
     width : 1260px;
     white-space: nowrap;
     overflow-x: scroll;
-    height :200px;
+    height :300px;
     overflow-y: hidden;
     margin-top: 30px;
 }
@@ -109,7 +109,7 @@
 
 .left{
     position: absolute;
-    top : 100px;
+    top : 150px;
     left : 20px;
     width : 50px;
     height : 50px;
@@ -125,7 +125,7 @@
 
 .right{
     position: absolute;
-    top : 100px;
+    top : 150px;
     left : 1190px;
     width : 50px;
     height : 50px;
@@ -147,14 +147,17 @@
     display: inline-block;
     margin:  50px 10px 0 10px;
     width: 350px;
-    height: 150px;
-    background-image: url("/static/img/333417_1640610154368611.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    height: 350px;
     cursor: pointer;
     transition: all 0.3s ease-out;
     border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
+}
+.recommend_card img{
+    width: 100%;
+    height:100%;
+
 }
 
 

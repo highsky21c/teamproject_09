@@ -93,6 +93,9 @@ def load_my_profile(request):
     for favorite in my_favorite:
         favorite.store.pic = json.loads(favorite.store.pic.replace('\'', '\"'))[0]
         favorite.store.menu = json.loads(favorite.store.menu.replace('\'', '\"'))
-    store_list = Store.objects.order_by('?')[0:5]
+    store_list = Store.objects.order_by('?')[0:8]
+
+    for store in store_list:
+        store.pic = json.loads(store.pic.replace('\'', '\"'))[0]
 
     return render(request, 'profile.html', {'favorite_store': my_favorite, 'recommend': store_list })

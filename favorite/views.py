@@ -26,7 +26,7 @@ def load_favorite(request):
 
 
 def add_favorite(request):
-    storename = request.POST['store_name']
+    storename = request.POST.get['store_name']
     user_id = request.user.id
     user = UserModel.objects.get(id=user_id)
     store = Store.objects.get(store_name=storename)
