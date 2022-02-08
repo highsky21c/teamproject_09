@@ -66,8 +66,8 @@ def findpw(request):
 
 
 def profile(request):
-    return render(request, 'profile.html', {})
-
+    all_Store = Store.objects.all()
+    return render(request, 'profile.html', {'stores' : all_Store})
 
 def test(request):
     a = request.POST.getlist('food')

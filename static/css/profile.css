@@ -52,12 +52,12 @@ body{
 }
 #pick_contents_container{
     width:1260px;
-    max-height: 1200px;
+    max-height: 800px;
     overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 #store_box{
     width:1100px;
@@ -99,29 +99,40 @@ body{
     margin-left: 10px;
 }
 #tags{
-    width:600px
+    width:1000px;
+    display:flex;
 }
 #tag{
     margin-top: 10px;
     background-color: #8D9CAE;
-    width: 90px;
+    width: auto; /*글씨길이에 맞춰 너비조정*/
     height: 30px;
     color: white;
     line-height: 30px;
     padding-left: 5px;
+    padding-right: 5px;
 }
-#recommend_wrapper{
+#recommend_container{
     width:1260px;
     background-color: #f5dd5d;
     border: 1px double lightgrey;
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     height: 500px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    }
+.upper_box{
+    width:1100px;
+    height: 250px;
 }
 .box{
+    margin: 30px 0 0 10px;
     position: relative;
 }
 
-.recommend_imgbox{
+.recommend_img_box{
     background-image: url("/static/img/default.png");
     width:300px;
     height:200px;
@@ -131,15 +142,17 @@ body{
     width:280px;
     height:180px;
     margin:10px;
+    position: relative;
+    z-index: 4;
 }
 .recommend_descbox{
-    width:300px;
-    height:200px;
+    width:280px;
+    height:180px;
     margin:20px;
-    top:50px;
-    left:50px;
+    top:-10px;
+    left:-10px;
     position: absolute;
-    z-index: 3;
+    z-index: 5;
     background-color: white;
     opacity: 80%;
 }
@@ -149,5 +162,4 @@ body{
     font-weight: 600;
     color: black;
 }
-
 

@@ -78,4 +78,3 @@ def sign_in_view(request): # 로그인 화면이 실행될 때,
 def logout(request):
     auth.logout(request)
     return redirect('/') #tweet의 home -> 사용자가 없으면 -> 로그인 화면
-
