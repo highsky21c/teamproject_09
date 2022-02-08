@@ -152,7 +152,7 @@ body{
     top:-10px;
     left:-10px;
     position: absolute;
-    z-index: 3;
+    z-index: 5;
     background-color: white;
     opacity: 80%;
 }
@@ -162,5 +162,4 @@ body{
     font-weight: 600;
     color: black;
 }
-
 
