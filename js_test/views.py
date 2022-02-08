@@ -27,6 +27,7 @@ def detail(request, store_name):
     user = 'js'
     store = Store.objects.get(store_name=store_name)
     store.menu = json.loads(store.menu.replace('\'','\"'))
+    store.pic = json.loads(store.pic.replace('\'', '\"'))
     print(store)
     # favorite = Favorite.objects.filter(user=user, content=store_name)
     # if len(favorite) == 0:
@@ -39,8 +40,6 @@ def detail(request, store_name):
         comment = {'avatar': '/static/img/333417_1640610154368611.jpg', 'username': 'username', 'comment_id': i,
                    'comment_content': 'asdfadfadfadf'}
         comments.append(comment)
-
-
     return render(request, 'detail.html', {'comments': comments, 'store': store})
 
 

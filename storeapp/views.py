@@ -165,8 +165,6 @@ def Save_Store_Data(request):
                 data_page = requests.get(page, headers=headers)
                 soup_page = BeautifulSoup(data_page.text, 'html.parser')
 
-                temp_object = SaveStore()
-
                 # 이미지 부분
                 image_detail = soup_page.select(
                     'main.pg-restaurant > .contents > .restaurant-photos > .list-photo_wrap > .list-photo')
