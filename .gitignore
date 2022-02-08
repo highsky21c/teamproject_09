@@ -1,7 +1,6 @@
 .idea/
 venv/
 
-**/migrations/
 
 .DS_Store
 # Created by https://www.toptal.com/developers/gitignore/api/python,django
