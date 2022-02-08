@@ -100,7 +100,10 @@ def profile(request):
     favorite_store = Store.objects.all()
 
     # 지금 로그인된 사람 id로, 좋아요 한 가게를 필터링해서 보내주고,(좋아요에서 쓸용)
+    like_store = Store.objects.all()
       #->가게이름, 주소, 번호, 운영시간, 사진, 메뉴, kind-of-food, 가격대
     #가게 무작위 10개 데이터 보내주고(추천)
+    
+
       #->가격, 주소, 가격대 ,운영시간,
-    return render(request, 'profile.html',{'favorite__Store':favorite_store})
+    return render(request, 'profile.html',{'favorite_Store':favorite_store},{'like_Store':like_store},)
