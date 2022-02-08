@@ -1,6 +1,11 @@
 .idea/
 venv/
 
+<<<<<<< HEAD
+=======
+!**/migrations
+!**/migrations/__init__.py
+>>>>>>> 6edda5ce0bbebc0f14266e51c7876156647d6233
 
 .DS_Store
 # Created by https://www.toptal.com/developers/gitignore/api/python,django
