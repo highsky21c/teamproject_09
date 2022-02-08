@@ -1,7 +1,6 @@
 @font-face {
     font-family: 'Cafe24SsurroundAir';
     src: url('/static/font/Cafe24SsurroundAir.ttf') format('truetype');
-
 }
 
 #header{
@@ -26,7 +25,12 @@
     height: 100%;
     
 }
-
+.logout{
+    text-decoration-line: none;
+}
+.profile{
+    text-decoration-line: none;
+}
 .header_buttons{
     width: 200px;
     height : 60px;
