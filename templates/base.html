@@ -23,10 +23,10 @@
     <div class="header_buttons">
         {% if not user.is_authenticated %} <!--로그인상황이 아닐때-->
         <i class="far fa-user-circle fa-3x"></i>
-        <a class="" href="/join/"> Logout </a>
+        <a class="logout" href="/join/"> Logout </a>
     {% else %} <!--로그인이 잘 되어있을때-->
-        <a class="" href="/user/profile/">{{ user.username }}님</a>
-        <a class="" href="/logout/"> Logout </a>
+        <a class="profile" href="/profile/">{{ user.username }}님</a>
+        <a class="logout" href="/logout/"> Logout </a>
     {% endif %}
     </div>
 </div>
