@@ -38,7 +38,7 @@ body{
 }
 #main-container{
     width: 450px;
-    height: 600px;
+    height: 700px;
     margin:5% auto;
     display: flex;
     flex-direction: column;
@@ -63,6 +63,13 @@ body{
     margin: 0 auto;
     display: flex;
     justify-content: center;
+}
+.a_tag__box{
+    display: flex;
+    align-items: end;
+}
+.redirect{
+    text-decoration-line: none;
 }
 .name_to_password{
     display: flex;
