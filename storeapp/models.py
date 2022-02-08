@@ -22,17 +22,36 @@ from django.db import models
 #     parking = models.CharField(max_length=256, blank=True)
 
 
+class Store(models.Model):
+    store_name = models.CharField(max_length=10)
+    address = models.CharField(max_length=100)
+    phone_num = models.CharField(max_length=45)
+    last_order = models.CharField(max_length=45)
+    web_link = models.CharField(max_length=150)
+    operating_time = models.CharField(max_length=150)
+    break_time = models.CharField(max_length=45)
+    holiday = models.CharField(max_length=45)
+    pic = models.TextField()
+    menu = models.TextField()
+    kind_of_food = models.CharField(max_length=100)
+    price_range = models.CharField(max_length=45)
+    parking = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'Store'
+
+
 class SaveStore(models.Model):
     class Meta:
         db_table = "stores"
 
     store = models.TextField(null=True)
 
-
-
-class SaveSubCategory(models.Model):
-    class Meta:
-        db_table = 'subcategory'
-
-    subtitle = models.CharField(max_length=256)
-    stores = models.TextField(null=True)
+#
+#
+# class SaveSubCategory(models.Model):
+#     class Meta:
+#         db_table = 'subcategory'
+#
+#     subtitle = models.CharField(max_length=256)
+#     stores = models.TextField(null=True)
