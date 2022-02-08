@@ -6,11 +6,10 @@ from django.utils.decorators import method_decorator
 from .decorators import login_message_required, admin_required, logout_message_required
 import json
 from django.core.serializers.json import DjangoJSONEncoder
-from .models import Store
 from favorite.models import Favorite
 from bs4 import BeautifulSoup
 import requests
-from storeapp.models import SaveStore
+from storeapp.models import Store
 
 
 def main(request):  # 메인 화면
@@ -23,9 +22,11 @@ def main(request):  # 메인 화면
 
 
 def detail(request, store_name):
+
     # user = request.user
     user = 'js'
-    store = Store.objects.filter(store_name=store_name)
+    store = Store.objects.get(store_name=store_name)
+    print(store)
     # favorite = Favorite.objects.filter(user=user, content=store_name)
     # if len(favorite) == 0:
     #     favorite_value = 'off'
@@ -78,7 +79,7 @@ def test(request):
 def test_Store_data(request):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
-    for i in range(1, 11):
+    for i in range(1,11):
 
         data_seoul = requests.get(
             f'https://www.mangoplate.com/search/%EC%84%9C%EC%9A%B8?keyword=%EC%84%9C%EC%9A%B8&page={i}',
@@ -107,7 +108,7 @@ def test_Store_data(request):
         # 크롤링을 통해 저장할 정보
         for page in seoul_href_list:
             # print(page)
-
+            store_db = Store()
             page_detail = {
                 'store_name': '',
                 'address': '',
@@ -128,8 +129,6 @@ def test_Store_data(request):
             data_page = requests.get(page, headers=headers)
             soup_page = BeautifulSoup(data_page.text, 'html.parser')
 
-            temp_object = SaveStore()
-
             # 이미지 부분
             image_detail = soup_page.select(
                 'main.pg-restaurant > .contents > .restaurant-photos > .list-photo_wrap > .list-photo')
@@ -138,6 +137,7 @@ def test_Store_data(request):
                 img_list = detail.select_one('meta')['content']
                 detail_imgs.append(img_list)
             page_detail['pic'] = detail_imgs
+            store_db.pic = detail_imgs
 
             # 텍스트부분
             common_page = soup_page.select(
@@ -145,7 +145,7 @@ def test_Store_data(request):
             for detail in common_page:
                 store_name = detail.select_one('header > .restaurant_title_wrap > .title > .restaurant_name').text
                 page_detail['store_name'] = store_name
-
+                store_db.store_name = store_name
                 infos = detail.select('.info > tbody > tr')
                 for info in infos:
 
@@ -164,6 +164,7 @@ def test_Store_data(request):
                             if "지번" in use_info:
                                 use_info = use_info.replace('지번', ',지번 : ').split(',')
                                 page_detail['address'] = use_info
+                        store_db.address = use_info[0]
 
                     elif info_title == '전화번호':
                         use_info = info.select_one("td").text.replace('\n', '')
@@ -171,11 +172,11 @@ def test_Store_data(request):
                             continue
                         else:
                             page_detail['phone_num'] = use_info
-
+                        store_db.phone_num = use_info
                     elif info_title == '음식 종류':
                         use_info = info.select_one("td").text.replace('\n', '')
                         page_detail['kind_of_food'] = use_info
-
+                        store_db.kind_of_food = use_info
 
                     elif info_title == '가격대':
                         use_info = info.select_one("td").text.replace('\n', '')
@@ -183,13 +184,15 @@ def test_Store_data(request):
                             continue
                         else:
                             page_detail['price_range'] = use_info
-
+                            store_db.price_range = use_info
                     elif info_title == '주차':
                         use_info = info.select_one("td").text.replace('\n', '')
                         if use_info == '':
                             continue
                         else:
                             page_detail['parking'] = use_info
+                            store_db.parking = use_info
+
 
                     elif info_title == '영업시간':
                         use_info = info.select_one("td").text.replace('\n', '')
@@ -197,20 +200,21 @@ def test_Store_data(request):
                             continue
                         else:
                             page_detail['operating_time'] = use_info
-
+                            store_db.operating_time = use_info
                     elif info_title == '쉬는시간':
                         use_info = info.select_one("td").text.replace('\n', '')
                         if use_info == '':
                             continue
                         else:
                             page_detail['break_time'] = use_info
-
+                            store_db.break_time = use_info
                     elif info_title == '마지막주문':
                         use_info = info.select_one("td").text.replace('\n', '')
                         if use_info == '':
                             continue
                         else:
                             page_detail['last_order'] = use_info
+                            store_db.last_order = use_info
 
                     elif info_title == '휴일':
                         use_info = info.select_one("td").text.replace('\n', '')
@@ -218,6 +222,7 @@ def test_Store_data(request):
                             continue
                         else:
                             page_detail['holiday'] = use_info
+                            store_db.holiday = use_info
 
                     elif info_title == '메뉴':
                         food_info = info.select("td > .Restaurant_MenuList > li")
@@ -227,6 +232,7 @@ def test_Store_data(request):
                             food_price = detail_food.select_one('.Restaurant_MenuPrice').text
                             menu[idx] = [food_name, food_price]
                         page_detail['menu'] = menu
+                        store_db.menu = menu
 
                     elif info_title == '웹 사이트':
                         use_info = info.select_one("td > a")['href']
@@ -234,6 +240,7 @@ def test_Store_data(request):
                             continue
                         else:
                             page_detail['web_link'] = use_info
+                            store_db.web_link = use_info
 
                     else:
                         use_info = ''
@@ -241,9 +248,6 @@ def test_Store_data(request):
 
                         # print(info_title, use_info)
             store_detail = page_detail
+            store_db.save()
 
-            print(store_detail)
-            # temp_object.store = json.dumps(store_detail)
-            # temp_object.save()
-            # print(page_detail)
     return HttpResponse('성공')  # 나중에 render()로 메인페이지로 연결
