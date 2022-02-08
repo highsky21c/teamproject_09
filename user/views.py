@@ -90,10 +90,9 @@ def load_my_profile(request):
     user_id = request.user.id
     user = UserModel.objects.get(id=user_id)
     my_favorite = Favorite.objects.filter(user=user).order_by('date')
-    menu_list = []
-    picture_list = []
     for favorite in my_favorite:
-        menu_list.append(json.loads(favorite.store.menu.replace('\'', '\"')))
-        picture_list.append(json.loads(favorite.store.pic.replace('\'', '\"'))[0])
+        favorite.store.pic = json.loads(favorite.store.pic.replace('\'', '\"'))[0]
+        favorite.store.menu = json.loads(favorite.store.menu.replace('\'', '\"'))
     store_list = Store.objects.order_by('?')[0:5]
-    return render(request, 'profile.html', {'favorite_store': my_favorite, 'menu_list': menu_list, 'recommend': store_list, 'store_pic': picture_list})
+
+    return render(request, 'profile.html', {'favorite_store': my_favorite, 'recommend': store_list })
