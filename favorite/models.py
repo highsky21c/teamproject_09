@@ -9,7 +9,7 @@ class Favorite(models.Model):
         db_table = "favorite"
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)
-    content = models.ForeignKey(Store, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
 
 
 

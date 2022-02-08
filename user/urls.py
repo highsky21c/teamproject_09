@@ -7,5 +7,6 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('find-id/', views.findid, name='find-id'),
     path('find-id/find/', views.ajax_find_id_view, name='ajax_id'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.load_my_profile, name='profile'),
+    # path('profile/', views.profile, name='profile'),
 ]

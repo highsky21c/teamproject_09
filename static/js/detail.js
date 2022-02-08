@@ -107,7 +107,7 @@ function favorite() {
         favorite_on.style.display = 'flex'
         $.ajax({
             type: 'POST',
-            url: '/favorite/add',
+            url: '/favorite/add/',
             data: {'store_name': storename},
             success: function (response) {
                 console.log(response['result'])
@@ -118,7 +118,7 @@ function favorite() {
         favorite_on.style.display = 'none'
         $.ajax({
             type: 'POST',
-            url: '/favorite/delete',
+            url: '/favorite/delete/',
             data: {'store_name': storename},
             success: function (response) {
                 console.log(response['result'])

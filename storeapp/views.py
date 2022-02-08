@@ -252,13 +252,16 @@ def Save_Store_Data(request):
 
                         elif info_title == '메뉴':
                             food_info = info.select("td > .Restaurant_MenuList > li")
-                            menu = {}
+                            menu = []
                             for idx, detail_food in enumerate(food_info):
                                 food_name = detail_food.select_one('.Restaurant_Menu').text
                                 food_price = detail_food.select_one('.Restaurant_MenuPrice').text
-                                menu[idx] = [food_name, food_price]
+                                temp = food_name + ' - ' + food_price
+                                menu.append(temp)
                             page_detail['menu'] = menu
                             store_db.menu = menu
+
+
 
                         elif info_title == '웹 사이트':
                             use_info = info.select_one("td > a")['href']
