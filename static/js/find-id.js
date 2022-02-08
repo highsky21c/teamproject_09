@@ -72,17 +72,20 @@ $('#find-id').click(function () {
             'name': name,
             'email': email,
         },
-        success: function (response) {
-            console.log(response)
+        success:
+            function show_id (response) {
             $('#result_id').replaceWith(
                 '<div style="margin: 20px;" id="result_id"><hr><div style="text-align:center; "><span style="font-size: 16px;">입력된 정보로 가입된 아이디는 </span><span style="font-size: 20px; font-weight: bold;" id="result_id">' + response.result_id +
                 '</span><span style="font-size: 16px;"> 입니다.</span></div><hr></div>')
+            setTimeout(function(){window.location.href='/sign-in/'},3000)
         },
         error: function () {
             if (name == "" || email == "") {
-                alert('이름와 이메일을 입력해주세요.');
+                alert('이름과 이메일을 입력해주세요.');
+                window.location.reload()
             } else {
                 alert('입력하신 정보가 일치하지 않거나 존재하지 않습니다.');
+                window.location.reload()
             }
         },
     });
