@@ -17,7 +17,8 @@ def sign_up_view(request): # 회원가입 화면이 실행될 때,
     elif request.method == 'POST': # POST 방식이면 아래 정보를 가져옴
         #아래 데이터를 가져오고, 없으면 빈 문자열 처리 후 변수에 저장
 
-        username = request.POST.get('username', '') #아이디
+        username = request.POST.get('username', '') #이름
+        id = request.POST.get('id', '')  # 아이디
         password = request.POST.get('password', '') #비밀번호
         password2 = request.POST.get('password2', '') #비밀번호 확인
         email = request.POST.get('email', '')  # 이메일
@@ -36,7 +37,7 @@ def sign_up_view(request): # 회원가입 화면이 실행될 때,
                 print('is it blank!?')
                 return render(request, 'sign-up.html', {'error': '이름,아이디,비밀번호,이메일 필수'})
 
-            exist_username = get_user_model().objects.filter(username=username)  #내가 입력한 username(좌)이 username에 있는 지 get_user_model() 함수로 확인
+            exist_username = get_user_model().objects.filter(username=id)  #내가 입력한 username(좌)이 username에 있는 지 get_user_model() 함수로 확인
             exist_email = get_user_model().objects.filter(email=email)
             if exist_username: # ID 중복이면
 
@@ -46,7 +47,7 @@ def sign_up_view(request): # 회원가입 화면이 실행될 때,
                 return render(request, 'sign-up.html', {'error' : '이메일 존재'}) #회원가입화면
             else: #중복이 아니면
 
-                UserModel.objects.create_user(username=username, password=password, email=email, bio=bio, like_food=json_checklist ) #유저생성
+                UserModel.objects.create_user(username=id, last_name=username,password=password, email=email, bio=id, like_food=json_checklist ) #유저생성
                 return redirect('/sign-in/') # 회원가입(사용자 저장) 완료후 로그인페이지로 이동
 
 
