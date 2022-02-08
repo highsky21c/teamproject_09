@@ -44,49 +44,35 @@
              </div>
             {% else %}
             {% for f_store in favorite_store %}
-                <div id="store_box">
+                <div id="store_box" onclick="location.href='/frontend/detail/{{ f_store.store.store_name }}'">
                 <div id="img_box">
                     <img id="store_img" src="{{ f_store.store.pic }}"><!--대표사진-->
                 </div>
                 <div id="store_desc_wrapper">
+                    <div id="tags"><!--얘도조건문 쓰자!-->
+                        <p id="tag"># {{ f_store.store.kind_of_food}}</p>
+                    </div>
                     <p id="store_name" class="s_name">{{ f_store.store.store_name }}</p>
+                    <p id="store_address" class="descs">주소: {{ f_store.store.address }}</p>
+                    <p id="store_worktime" class="descs">운영시간) {{ f_store.store.operating_time }}</p>
                     <div class="desc-box">
                         <div class="left_desc">
-                            <p id="store_address" class="descs">주소: {{ f_store.store.address }}</p>
-                            {% if f_store.phone_num is not "" %}<!--빈값이 어떻게 넘어오는지 확인-->
-                                <p id="store_phonenum"  class="descs">전화번호 : {{ f_store.store.phone_num }}</p>
-                            {% else %}
-                                <p id="store_phonenum"  class="descs">전화번호 : {{ f_store.store.phone_num }}</p>
-                            {% endif %}
-
+                            <p id="store_phonenum"  class="descs">전화번호 : {{ f_store.store.phone_num }}</p>
                             <p id="price" class="descs">가격대: {{ f_store.store.price_range }}</p>
                         </div>
                         <div class="right_desc">
-                            {% if store.operating_time == '' and store.menu == ''%}
-                                <p id="store_worktime" class="descs"> 운영시간:운영시간 정보가 없습니다.</p>
-                                <p id="menu" class="descs"> 메뉴 : 메뉴정보가 없습니다.</p>
-                            {% elif store.menu == '' %}
-                                <p id="store_worktime" class="descs">운영시간:{{ f_store.store.operating_time }}</p>
-                                <p id="menu" class="descs">메뉴: 메뉴정보가 없습니다.</p>
-                            {% elif  store.operating_time == '' %}
-                                <p id="store_worktime" class="descs">운영시간: 운영시간 정보가 없습니다.</p>
-                                <p id="menu" class="descs">메뉴:{{ f_store.store.menu.0 }} </p>
-                            {% else %}
-                                <p id="store_worktime" class="descs">운영시간:{{  f_store.store.operating_time }}</p>
-                                <p id="menu" class="descs">메뉴: {{ f_store.store.menu.0 }} </p>
-                            {% endif %}
+                            <p id="menu" class="descs">메뉴: {{ f_store.store.menu.0}}</p>
+                            <p class="descs2"> {{ f_store.store.menu.1}}</p>
+                            <p class="descs2"> {{ f_store.store.menu.2}}</p>
                         </div>
                     </div>
-                    <div id="tags"><!--얘도조건문 쓰자!-->
-                            <p id="tag"># 음식분류</p>
-                    </div>
+
                 </div>
             </div>
             {% endfor %}
         {% endif %}
         </div>
 
-        </div>
         <p class="box_title">{{ username }}님이 좋아요 누른 가게</p> <!--얘가 틀이잡히면 좋아요도 같은방식-->
         <div id="pick_contents_container">
         {% if favorite_store.count == 0 %}
@@ -148,14 +134,15 @@
         <div id="recommend_container"><!--추천박스-->
             {% for rd_store in recommend %}
             <div class="box">
-                <div class="recommend_imgbox" ><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
+                <div class="recommend_imgbox"  ><!--추천맛집 div가 두개 하나는 사진 하나는 가게정보-->
                     <img id="recommend_img"  class="rcm_img" src="{{ rd_store.pic }}"> <!--사진url앞에것만 잘라보기-->
                 </div>
-                <div class="recommend_descbox">
+                <div class="recommend_descbox" onclick="location.href='/frontend/detail/{{ rd_store.store_name }}'">
                     <p class="s_descs">가게이름: {{ rd_store.store_name }}</p>
                     <p class="s_descs">가격대: {{ rd_store.price_range }}</p>
                     <p class="s_descs">음식종류: {{ rd_store.kind_of_food }}</p>
-                    <p class="s_descs">주소: {{ rd_store.address}}</p>
+                    <p class="s_descs">주차: {{ rd_store.parking }}</p>
+                    <p class="go"> 이 가게가 궁금하다면 클릭! </p>
                 </div>
             </div>
             {% endfor %}
