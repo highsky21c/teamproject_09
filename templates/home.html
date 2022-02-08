@@ -9,26 +9,32 @@
 {% block content %}
     <div class="wrap">
         <div class="banner">
-            <div class="search_box">
-                <input type="text" id="search" class="search_box_text"/>
-                <button class="search_box_button" onclick="load_search_result()"> 검색</button>
+            <form class="search_box" action="/stores/home/" method="post">
+                {% csrf_token %}
+                <input type="text" id="search" name="input" class="search_box_text"/>
+                <button class="search_box_button" type="submit" onclick="load_search_result()"> 검색</button>
                 <div id="auto-search" style="display: none"></div>
-            </div>
+            </form>
         </div>
         <!--검색 결과 슬라이드!-->
+
         <div class="content_wrapper">
+            {% for recommend in container %}
+                {% if recommend|length != 0%}
+
             <div class="recommend_row">
                 <div class="recommend_title">
-                    <p>만두</p>
+                    <p>{{ recommend.0.kind_of_food }}</p>
                 </div>
                 <div class="swiper recommend_content">
                     <div class="left">
                         <i class="fas fa-angle-left fa-2x"></i>
                     </div>
                     <div class="swiper-wrapper slider_wrap">
-                        {% for a in container %}
-                            <div class="swiper-slide recommend_card" id="store_{{ a.store }}">
+                        {% for a in recommend %}
+                            <div class="swiper-slide recommend_card" id="store_{{ a.id }}">
                                 {{ forloop.counter0 }}
+                            <img src="{{ a.pic }}" onclick="window.location='/frontend/detail/{{ a.store_name }}'">
                             </div>
                         {% endfor %}
                     </div>
@@ -37,6 +43,8 @@
                     </div>
                 </div>
             </div>
+                {% endif %}
+            {% endfor %}
         </div>
 
     </div>

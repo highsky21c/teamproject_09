@@ -80,7 +80,16 @@ var swiper = new Swiper(".recommend_content", {
 });
 
 $(function () {
-    let category = ['한식', '중식', '일식', '한정식', '중국음식']
+    let category = [
+        '오리요리', '퓨전 한식', '기타 한식', '백반', '찌개', '철판 요리', '해산물요리', '탕', '전골', '국수', '전통한식', '뷔페',
+        '정통 일식', '면요리', '스시', '라멘', '일반 일식', '기타 일식', '까스요리', '회', '오뎅', '일본카레', '소바', '벤토', '돈부리', ' 꼬치', '우동',
+          '이자카야',
+        '퓨전 양식', '기타양식', '스테이크', '바베큐', '버거',
+        '기타 중식', '딤섬', '정통 중식', '만두', '일반 중식',
+        '다국적 퓨전', '와인', '세계음식 기타', '이탈리안', '고기', '프랑스 음식', '닭', '다국적아시아음식', '태국 음식', '베트남음식', '인도 음식',
+        '전통주점', '칵테일', '포차',
+        '브런치', '디저트', '베이커리', '샌드위치', '카페'
+    ]
 
     $('#search').keyup(function (arg) {
         let txt = $(this).val();
@@ -91,16 +100,12 @@ $(function () {
             auto_search.children().remove();
             for (let i = 0; i < category.length; i++) {
                 if (category[i].indexOf(txt) !== -1) {
-                    console.log('txt is in!! value is ', category[i])
                     let word_list = category[i].split(txt)
-                    console.log('slicing txt is', word_list)
-
                     auto_search.append(`
-                    <div class="auto-search-content">${word_list[0]}<b style="color: #ec6f1f">${ txt }</b>${word_list[1]}</div>
+                    <div class="auto-search-content" onclick="auto_click(this.text)">${word_list[0]}<b style="color: #ec6f1f">${ txt }</b>${word_list[1]}</div>
                     `)
                     count +=1
                 }
-
             }
             if(count <=0){
                 auto_search.css('display', 'none')
@@ -112,6 +117,10 @@ $(function () {
     })
 
 });
+
+function auto_click(text){
+    console.log(text)
+}
 
 function load_search_result(){
     let txt = $('#search').val();

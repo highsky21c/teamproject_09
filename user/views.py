@@ -111,3 +111,4 @@ def load_my_profile(request):
 
     return render(request, 'profile.html', {'favorite_store': my_favorite, 'recommend': store_list, 'username':username})
 
+

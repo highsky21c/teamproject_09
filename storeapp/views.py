@@ -15,9 +15,9 @@ main_category = ['한식', '일식', '양식', '중식', '기타나라음식', '
 
 main_sub_category = {
     '0': ['오리요리', '퓨전 한식', '기타 한식', '백반', '찌개', '철판 요리', '해산물요리', '탕', '전골', '국수', '전통한식', '뷔페'],
-    '1': ['정통일식', '면요리', '스시', '라멘', '일반 일식', '기타 일식', '까스요리', '회', '오뎅', '일본카레', '소바', '벤토', '돈부리', ' 꼬치', '우동',
+    '1': ['정통 일식', '면요리', '스시', '라멘', '일반 일식', '기타 일식', '까스요리', '회', '오뎅', '일본카레', '소바', '벤토', '돈부리', ' 꼬치', '우동',
           '이자카야'],
-    '2': ['퓨전양식', '기타양식', '스테이크', '바베큐', '버거'],
+    '2': ['퓨전 양식', '기타양식', '스테이크', '바베큐', '버거'],
     '3': ['기타 중식', '딤섬', '정통 중식', '만두', '일반 중식'],
     '4': ['다국적 퓨전', '와인', '세계음식 기타', '이탈리안', '고기', '프랑스 음식', '닭', '다국적아시아음식', '태국 음식', '베트남음식', '인도 음식'],
     '5': ['와인', '전통주점', '칵테일', '포차'],
@@ -27,8 +27,9 @@ main_sub_category = {
 
 # 메인페이지
 def Show_Store(request):
-    input_foods = []
+    var = request.POST.get('input')
 
+    input_foods =[var]
     if request.POST:
         input_food = request.POST.get('input_food', '')
         input_foods.append(input_food)
@@ -57,8 +58,11 @@ def Show_Store(request):
         sub_most_similar_docs = sub_category_model.docvecs.most_similar([sec_inferred_doc_vec], topn=3)
         print('sub_most_similar_docs[0][0]', sub_most_similar_docs[0][0])
 
+
+
         recommand_stores = []
         for sec_index, sec_similarity in sub_most_similar_docs:
+            temp = []
             print('main_sub_category[index]', main_sub_category[str(index)])
             print('subcategory :', main_sub_category[str(index)][sec_index], '//', 'similarity:', sec_similarity)
 
@@ -70,14 +74,23 @@ def Show_Store(request):
 
             # 가게 정보를 모두 가져옴
             # 모든 객체(200개)를 뽑아옴
-            stores = SaveStore.objects.values()
-
+            stores = Store.objects.all()
             for store in stores:
-                store = json.loads(store['store'])
-                if key in store['kind_of_food']:
-                    recommand_stores.append(store)
+                if key in store.kind_of_food:
+                    temp.append(store)
+            recommand_stores.append(temp)
 
-        return render(request, 'storeapp/temp_home.html', {'stores_POST': recommand_stores})
+        check = []
+        for recommend in recommand_stores:
+            if len(recommend) == 0 or recommend[0].kind_of_food in check:
+                recommend = []
+            else:
+                check.append(recommend[0].kind_of_food)
+                for stores in recommend:
+                    print(stores.kind_of_food)
+                    stores.pic = json.loads(stores.pic.replace('\'','\"'))[0]
+
+        return render(request, 'home.html', {'container': recommand_stores})
 
     else:
         # GET일 경우, 랜덤으로 10개 뽑아 보여줌.
@@ -85,16 +98,15 @@ def Show_Store(request):
         for _ in range(11):
             idx = random.randrange(1, 201)
             random_store = SaveStore.objects.values().get(pk=idx)
-            print('random_store', random_store)
-            rand_store = random_store['store']
+            rand_store = random_store['store_name']
 
-            # 디코딩
-            decoded_store = json.loads(rand_store)
-            print(decoded_store)
+            # # 디코딩
+            # decoded_store = json.loads(rand_store)
+            # print(decoded_store)
 
-            ran_stores.append(decoded_store)
+            ran_stores.append(rand_store)
 
-        return render(request, 'storeapp/temp_home.html', {'store_GET': ran_stores})
+        return render(request, 'home.html', {'store_GET': ran_stores})
 
 
 def Save_Store_Data(request):

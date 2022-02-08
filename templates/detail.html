@@ -72,7 +72,12 @@
                         <div class='info_icon'>
                             <i class="fas fa-utensils"></i>
                         </div>
-                        <p>{{ store.menu }}</p>
+                        <div style="margin-top: 20px;">
+                            {% for a in store.menu %}
+                        <p style="margin-top: 10px;">{{ a }}</p>
+                        {% endfor %}
+                        </div>
+
                     </div>
                     <div class='about_info_row'>
                         <div class='info_icon'>
@@ -90,16 +95,6 @@
                             <p style="margin-top: 10px;">마지막 주문 : {{ store.last_order }}</p>
                         </div>
 
-                    </div>
-                    <div class='about_info_row'>
-                        <div class='info_icon'>
-                            <i class="fas fa-address-card"></i>
-                        </div>
-                        <div class='store_bio'>
-                            <p>둘이 먹다 죽어도 집!<br>
-                                너무 맛있으니 다들 한번씩 들러주세요!!<br>
-                                리뷰 이벤트 중입니다</p>
-                        </div>
                     </div>
                 </div>
                 <div class='about_right_content'>
