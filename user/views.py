@@ -110,3 +110,4 @@ def load_my_profile(request):
         store.pic = json.loads(store.pic.replace('\'', '\"'))[0]
 
     return render(request, 'profile.html', {'favorite_store': my_favorite, 'recommend': store_list, 'username':username})
+

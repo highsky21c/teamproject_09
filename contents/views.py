@@ -6,6 +6,7 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
+from storeapp.models import Store
 
 
 # Create your views here.
@@ -22,19 +23,16 @@ def contents(request):
     if request.method == 'GET':  # 요청하는 방식이 GET 방식인지 확인하기
         user = request.user.is_authenticated  # 사용자가 로그인이 되어 있는지 확인하기
         if user:  # 로그인 한 사용자라면
-            all_contents = ContentsModel.objects.all().order_by('-created_at')
-            return render(request, 'contents/home1.html', {'contents': all_contents})
+
+            return render(request, 'home.html', {})
         else:  # 로그인이 되어 있지 않다면
             return redirect('/sign-in/')
-
     elif request.method == 'POST':  # 요청 방식이 POST 일때
-        user = request.user  # 현재 로그인 한 사용자를 불러오기
-        my_contents = ContentsModel()  # 글쓰기 모델 가져오기
-        my_contents.author = user  # 모델에 사용자 저장
-        my_contents.subject = request.POST.get('my-subject','')
-        my_contents.content = request.POST.get('my-content', '')  # 모델에 글 저장, 없으면 공백으로 적어라
-        my_contents.save()
-        return redirect('/contents/')
+        search_words = request.POST.get['search_words']
+
+        all_stores = Store().objects.filter(kind_of_food=search_words)
+
+        return HttpResponse(json.dumps(all_stores), content_type="application/json")
 
 
 @login_required
