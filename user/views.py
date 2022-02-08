@@ -1,4 +1,6 @@
 #실제 기능 동작
+import random
+
 from django.contrib import auth #장고 기본 제공 모듈
 from django.contrib.auth import get_user_model #사용자가 DB안에 있는 지 검사하는 함수
 from django.shortcuts import render, redirect  # render는 html 보여주는 것.
@@ -7,7 +9,8 @@ from django.contrib.auth.decorators import login_required
 import json
 from django.http import HttpResponse # 아이디찾기용
 from django.core.serializers.json import DjangoJSONEncoder
-from js_test.models import Store #실제적용시 모델바꿔야합니다.
+from favorite.models import Favorite
+from storeapp.models import Store
 
 def sign_up_view(request): # 회원가입 화면이 실행될 때,
     if request.method == 'GET': # GET 방식으로
@@ -95,15 +98,32 @@ def ajax_find_id_view(request):
                         content_type="application/json")
 
 def profile(request):
+    username = request.user.last_name
+
+    user_id = request.user.id #접속한 유저의 아이디를 불러서 저장
+    user = UserModel.objects.get(id=user_id) # 접속한 아이디로 그유저를 불러옴.
+    my_favorite = Favorite.objects.filter(user=user).order_by('-date')
+
+    for favorite in my_favorite:
+
+        store_name = favorite.store['store_name']
+        # print(store_name)
     # 지금 로그인된 사람 id로, 즐겨찾기한 가게를 필터링해서 보내주고,(즐겨찾기한 가게용)
       #->가게이름, 주소, 번호, 운영시간, 사진, 메뉴, kind-of-food, 가격대
-    favorite_store = Store.objects.all()
 
     # 지금 로그인된 사람 id로, 좋아요 한 가게를 필터링해서 보내주고,(좋아요에서 쓸용)
-    like_store = Store.objects.all()
       #->가게이름, 주소, 번호, 운영시간, 사진, 메뉴, kind-of-food, 가격대
-    #가게 무작위 10개 데이터 보내주고(추천)
-    
 
-      #->가격, 주소, 가격대 ,운영시간,
-    return render(request, 'profile.html',{'favorite_Store':favorite_store},{'like_Store':like_store},)
+    #가게 무작위 8개 데이터 보내주고(추천)
+    # Store_data = Store.objects.all()
+    # random_Store = random.shuffle(Store_data)
+    entry_list = list(Store.objects.values())#딕셔너리 접근할때 values꼭 필요
+    random_store_list=[]
+    count = len(entry_list)
+    for i in range(0,8):
+        random_index = random.randint(0,count- 1)
+        a = entry_list[random_index]
+        random_store_list.append(a)
+    # print(random_store_list)
+      #->가게이름, 주소, 가격대 ,운영시간,
+    return render(request, 'profile.html',{'username':username},{'random_store':random_store_list})
