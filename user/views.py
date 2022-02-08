@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect  # render는 html 보여주는 것
 from .models import UserModel #동일한 위치에 있는 models 파일에서 UserModel을 import
 from django.contrib.auth.decorators import login_required
 import json
+from django.http import HttpResponse # 아이디찾기용
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 def sign_up_view(request): # 회원가입 화면이 실행될 때,
@@ -79,3 +81,16 @@ def sign_in_view(request): # 로그인 화면이 실행될 때,
 def logout(request):
     auth.logout(request)
     return redirect('/') #tweet의 home -> 사용자가 없으면 -> 로그인 화면
+
+def findid(request):
+    return render(request, 'find-id.html')
+
+
+def ajax_find_id_view(request):
+    name = request.POST.get('name')
+    email = request.POST.get('email')
+    result_id = UserModel.objects.get(last_name=name, email=email)
+
+    return HttpResponse(json.dumps({"result_id": result_id.username}, cls=DjangoJSONEncoder),
+                        content_type="application/json")
+
