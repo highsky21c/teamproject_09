@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 import json
 from django.http import HttpResponse # 아이디찾기용
 from django.core.serializers.json import DjangoJSONEncoder
-
+from js_test.models import Store #실제적용시 모델바꿔야합니다.
 
 def sign_up_view(request): # 회원가입 화면이 실행될 때,
     if request.method == 'GET': # GET 방식으로
@@ -94,3 +94,14 @@ def ajax_find_id_view(request):
     return HttpResponse(json.dumps({"result_id": result_id.username}, cls=DjangoJSONEncoder),
                         content_type="application/json")
 
+def profile(request):
+    # 지금 로그인된 사람 id로, 즐겨찾기한 가게를 필터링해서 보내주고,(즐겨찾기한 가게용)
+      #->가게이름, 주소, 번호, 운영시간, 사진, 메뉴, kind-of-food, 가격대
+    all_Store = Store.objects.all()
+
+
+    # 지금 로그인된 사람 id로, 좋아요 한 가게를 필터링해서 보내주고,(좋아요에서 쓸용)
+      #->가게이름, 주소, 번호, 운영시간, 사진, 메뉴, kind-of-food, 가격대
+    #가게 무작위 10개 데이터 보내주고(추천)
+      #->가격, 주소, 가격대 ,운영시간,
+    return render(request, 'profile.html')
