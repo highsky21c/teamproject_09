@@ -20,15 +20,11 @@
                 </div>
                 <div class=' content_photo_picture_row swiper-wrapper'>
                     <!-- <div class='left_slider'>left</div> -->
-                    <div class='swiper-slide content_photo_content'>1</div>
-                    <div class='swiper-slide content_photo_content'>2</div>
-                    <div class='swiper-slide content_photo_content'>3</div>
-                    <div class='swiper-slide content_photo_content'>4</div>
-                    <div class='swiper-slide content_photo_content'>5</div>
-                    <div class='swiper-slide content_photo_content'>6</div>
-                    <div class='swiper-slide content_photo_content'>7</div>
-                    <div class='swiper-slide content_photo_content'>8</div>
-                    <div class='swiper-slide content_photo_content'>8</div>
+                    {% for s in store.pic %}
+                    <div class='swiper-slide content_photo_content'>
+                        <img src="{{ s }}">
+                    </div>
+                    {% endfor %}
                 </div>
                 <div class="right" id="slider_right">
                     <i class="fas fa-angle-right fa-2x"></i>
@@ -90,11 +86,13 @@
                             <i class="far fa-calendar-alt"></i>
                         </div>
                         <div>
-                            <p style="margin-top: 10px;">영업시간 : {{ store.operating_time }}</p>
-                            <p style="margin-top: 10px;">쉬는 시간 : {{ store.break_time }}</p>
-                            <p style="margin-top: 10px;">마지막 주문 : {{ store.last_order }}</p>
+                            <p style="margin-top: 10px;">영업시간</p>
+                            <p>     {{ store.operating_time }}</p>
+                            <p style="margin-top: 10px;">쉬는 시간 : </p>
+                            <p>     {{ store.break_time }}</p>
+                            <p style="margin-top: 10px;">마지막 주문 :</p>
+                            <p>     {{ store.last_order }}</p>
                         </div>
-
                     </div>
                 </div>
                 <div class='about_right_content'>

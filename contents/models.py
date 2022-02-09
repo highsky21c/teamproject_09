@@ -2,6 +2,7 @@
 from django.db import models
 from user.models import UserModel
 from django.conf import settings
+from storeapp.models import Store
 
 
 # Create your models here.
@@ -37,7 +38,7 @@ class ContentsModel(models.Model):
 class ContentsComment(models.Model):
     class Meta:
         db_table = "comment"
-    contents = models.ForeignKey(ContentsModel, on_delete=models.CASCADE)
+    contents = models.ForeignKey(Store, on_delete=models.CASCADE)
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     comment = models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)

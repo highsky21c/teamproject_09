@@ -10,6 +10,7 @@ from favorite.models import Favorite
 from bs4 import BeautifulSoup
 import requests
 from storeapp.models import Store
+from contents.models import ContentsComment
 
 
 def main(request):  # 메인 화면
@@ -27,21 +28,25 @@ def detail(request, store_name):
     user = 'js'
     store = Store.objects.get(store_name=store_name)
     store.menu = json.loads(store.menu.replace('\'','\"'))
+    store.pic = json.loads(store.pic.replace('\'', '\"'))
     print(store)
     # favorite = Favorite.objects.filter(user=user, content=store_name)
     # if len(favorite) == 0:
     #     favorite_value = 'off'
     # else:
     #     favorite_value = 'on'
-
+    comments_db = ContentsComment.objects.filter(contents = store)
+    print(comments_db)
     comments = []
-    for i in range(10):
-        comment = {'avatar': '/static/img/333417_1640610154368611.jpg', 'username': 'username', 'comment_id': i,
-                   'comment_content': 'asdfadfadfadf'}
+    for i in range(5):
+        comment = {'avatar': '/static/img/default.jpg', 'username': 'username', 'comment_id': i,
+                   'comment_content': '캐주얼 레스토랑. 자주 가는 친구에 의하면 브런치 메뉴와 해물볶음밥이 괜찮다고 해서 시켜봤다. 특별할 건 없지만 적당히, 가볍게 즐기기 좋다!'}
         comments.append(comment)
-
-
     return render(request, 'detail.html', {'comments': comments, 'store': store})
+
+
+def write_comment(request):
+    return
 
 
 def join(request):
