@@ -8,7 +8,9 @@
 {% endblock %}
 
 {% block content %}
+    <div id="user" style="display: none">{{ user.username }}</div>
     <div class='wrap'>
+
         <div class='content_photo_row'>
             <div class='content_title'>
                 <p>main</p>
@@ -109,25 +111,25 @@
                 {% for comment in comments %}
                     <div class='comment_row'>
                         <div class='comment_profile'>
-                            <img src='{{ comment.avatar }}'>
+                            <img src='/static/img/default.png'>
                         </div>
                         <div class='comment_middle'>
                             <div class='comment_user_name'>
-                                <p> {{ comment.username }} {{ forloop.counter0 }}</p>
+                                <p> {{ comment.author.username }}</p>
                             </div>
                             <div class='hr' style=''></div>
                             <div class='comment_content'>
                                 <p>
-                                    {{ comment.comment_content }}
+                                    {{ comment.comment }}
                                 </P>
                             </div>
                         </div>
-                        <div class='comment_like' id="comment_{{ forloop.counter0 }}" onclick="comment_like(this.id)">
+                        <div class='comment_like' id="comment_{{ comment.id }}" onclick="comment_like(this.id)">
                             <div class='comment_like_box'>
-                                <i class="fas fa-thumbs-up fa-3x comment_like_on" id='comment_{{ forloop.counter0 }}_on'
+                                <i class="fas fa-thumbs-up fa-3x comment_like_on" id='comment_{{ comment.id }}_on'
                                    style="display: none; color: white;"></i>
                                 <i class="far fa-thumbs-up fa-3x comment_like_off"
-                                   id='comment_{{ forloop.counter0 }}_off' style="display:flex; color: white;"></i>
+                                   id='comment_{{ comment.id }}_off' style="display:flex; color: white;"></i>
                             </div>
                         </div>
                     </div>
