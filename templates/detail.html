@@ -152,15 +152,11 @@
                 <i class="fas fa-angle-left fa-2x"></i>
             </div>
             <div class='swiper-wrapper recommend_wrap'>
-                <div class='swiper-slide recommend_card'></div>
-                <div class='swiper-slide recommend_card'></div>
-                <div class='swiper-slide recommend_card'></div>
-                <div class='swiper-slide recommend_card'></div>
-                <div class='swiper-slide recommend_card'></div>
-                <div class='swiper-slide recommend_card'></div>
-                <div class='swiper-slide recommend_card'></div>
-                <div class='swiper-slide recommend_card'></div>
-                <div class='swiper-slide recommend_card'></div>
+                {% for recommend in recommend_store %}
+                <div class='swiper-slide recommend_card' style="object-fit: cover; cursor: pointer" onclick="window.location.href='/frontend/detail/{{ recommend.store_name }}'">
+                    <img style="width:100%; height: 100%" src = {{ recommend.pic }}>
+                </div>
+                {% endfor %}
             </div>
             <div class="right" style="top:300px;">
                 <i class="fas fa-angle-right fa-2x"></i>

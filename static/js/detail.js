@@ -40,15 +40,21 @@ $(document).ready(function () {
     document.getElementById('favorite_on').style.display = 'none'
     document.getElementById('like_off').style.display = 'flex'
     document.getElementById('like_on').style.display = 'none'
+    document.getElementById('more_button').style.display = 'none'
 
     var comments = document.getElementsByClassName('comment_row')
 
-    for (let i = 0; i < comments.length; i++) {
+    if(comments.length >= 3){
+        for (let i = 0; i < comments.length; i++) {
         const comment = comments[0]
         if (i >= 3) {
             comments[i].style.display = 'none'
         }
+        document.getElementById('more_button').style.display = 'flex'
     }
+    }
+
+
 });
 
 //Map Loading

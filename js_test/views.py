@@ -43,7 +43,11 @@ def detail(request, store_name):
         comment = {'avatar': '/static/img/default.png', 'username': 'username', 'comment_id': i,
                    'comment_content': '캐주얼 레스토랑. 자주 가는 친구에 의하면 브런치 메뉴와 해물볶음밥이 괜찮다고 해서 시켜봤다. 특별할 건 없지만 적당히, 가볍게 즐기기 좋다!'}
         comments.append(comment)
-    return render(request, 'detail.html', {'comments': comments_db, 'store': store})
+    recommend_store = Store.objects.filter(kind_of_food=store.kind_of_food)
+
+    for k in recommend_store:
+        k.pic = json.loads(k.pic.replace('\'', '\"'))[1]
+    return render(request, 'detail.html', {'comments': comments_db, 'store': store, 'recommend_store': recommend_store})
 
 
 def write_comment(request):
