@@ -220,7 +220,7 @@ function write_comments() {
     let scroll_value = $(document).scrollTop();
     $.ajax({
         type: 'post',
-        url: '/comment/write',
+        url: '/frontend/comment/write',
         data: {'comment': text},
         success: function (response) {
             console.log(response['result'])
