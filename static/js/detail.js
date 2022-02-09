@@ -216,12 +216,15 @@ function more(id) {
 
 function write_comments() {
     const textarea = document.getElementById('comment_text')
+    let storename = $('#store_name').text()
+    let user = $('#user').text()
     let text = textarea.value
     let scroll_value = $(document).scrollTop();
     $.ajax({
         type: 'post',
-        url: '/frontend/comment/write',
-        data: {'comment': text},
+        url: '/frontend/comment/write/',
+        data: {'comment': text,
+                'store_name': storename},
         success: function (response) {
             console.log(response['result'])
         }
@@ -234,8 +237,8 @@ function write_comments() {
     document.getElementById('more_button').style.display = 'none'
     let a = $('.comment_row').clone()[0]
 
-    a.children[0].children[0].src = '/'
-    a.children[1].children[0].children[0].innerText = 'username  ' + comments.length
+    a.children[0].children[0].src = '/static/img/default.png'
+    a.children[1].children[0].children[0].innerText = user
     a.children[1].children[2].children[0].innerText = text
     a.children[2].id = 'comment_' + comments.length
     a.children[2].children[0].children[0].id = 'comment_' + comments.length + '_on'

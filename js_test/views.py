@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 import requests
 from storeapp.models import Store
 from contents.models import ContentsComment
+from user.models import UserModel
 
 
 def main(request):  # 메인 화면
@@ -27,7 +28,7 @@ def detail(request, store_name):
     # user = request.user
     user = 'js'
     store = Store.objects.get(store_name=store_name)
-    store.menu = json.loads(store.menu.replace('\'','\"'))
+    store.menu = json.loads(store.menu.replace('\'', '\"'))
     store.pic = json.loads(store.pic.replace('\'', '\"'))
     print(store)
     # favorite = Favorite.objects.filter(user=user, content=store_name)
@@ -35,18 +36,36 @@ def detail(request, store_name):
     #     favorite_value = 'off'
     # else:
     #     favorite_value = 'on'
-    comments_db = ContentsComment.objects.filter(contents = store)
+    comments_db = ContentsComment.objects.filter(contents=store)
     print(comments_db)
     comments = []
     for i in range(5):
-        comment = {'avatar': '/static/img/default.jpg', 'username': 'username', 'comment_id': i,
+        comment = {'avatar': '/static/img/default.png', 'username': 'username', 'comment_id': i,
                    'comment_content': '캐주얼 레스토랑. 자주 가는 친구에 의하면 브런치 메뉴와 해물볶음밥이 괜찮다고 해서 시켜봤다. 특별할 건 없지만 적당히, 가볍게 즐기기 좋다!'}
         comments.append(comment)
-    return render(request, 'detail.html', {'comments': comments, 'store': store})
+    return render(request, 'detail.html', {'comments': comments_db, 'store': store})
 
 
 def write_comment(request):
-    return
+
+    user_id = request.user.id
+    user = UserModel.objects.get(id=user_id)
+    comment_content = request.POST.get('comment')
+    store_name = request.POST.get('store_name')
+    store = Store.objects.get(store_name=store_name)
+    new_comment = ContentsComment()
+    new_comment.contents = store
+    new_comment.author = user
+    new_comment.comment = comment_content
+    new_comment.save()
+
+    context = {
+        'result':"추가 완료!"
+    }
+
+
+    return HttpResponse(json.dumps(context),
+                        content_type="application/json")
 
 
 def join(request):

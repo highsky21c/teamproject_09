@@ -12,5 +12,5 @@ urlpatterns = [
     path('find-pw', views.findpw, name='find-pw'),
     path('profile/', views.profile, name='profile'),
     path('store_db/', views.test_Store_data, name='test_Store'),
-    path('comment/write', views.write_comment, name='comment_write')
+    path('comment/write/', views.write_comment, name='comment_write')
 ]
